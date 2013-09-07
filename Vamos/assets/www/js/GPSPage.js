@@ -56,7 +56,7 @@ GPSPage.prototype = {
 		$("#mpgDisplay").html(this.app.mpg);
 		$("#costPerGalDisplay").html(this.app.costPerGal);
 
-		var roundedMiles = Math.round(this.app.miles * 1000)/1000.0
+		var roundedMiles = Math.round(this.app.miles * 100)/100.0
 		$("#milesDisplay").html(roundedMiles);
 		var totalCost = this.app.miles / this.app.mpg * this.app.costPerGal;
 		if (this.app.passengers.length === 0) {
@@ -87,6 +87,7 @@ GPSPage.prototype = {
 	setupGPS: function() {
 		var options = {timeout:15000, enableHighAccuracy:true, frequency: 5000};
 		this.app.miles = 0;
+		$("#milesDisplay").html(this.app.miles);
 		
 		watchID = navigator.geolocation.watchPosition(
 			this.onSuccess.bind(this),
