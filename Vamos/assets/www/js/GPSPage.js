@@ -31,8 +31,8 @@ GPSPage.prototype = {
         });
 
 		this.latlons = [];
-        //this.setupGPS();
-        this.testGPS();
+        this.setupGPS();
+        //this.testGPS();
 
         $("#endTripBtn").on("click", function() {
         	if (this.app.passengers.length === 0) {
@@ -42,6 +42,7 @@ GPSPage.prototype = {
         	// mpg (x) and $/gal ($) and passengers(x) for payment?
         	
         	this.endGPS();
+        	$("#endTripBtn").html('Stopped');
         }.bind(this));
 	},
 
@@ -55,7 +56,8 @@ GPSPage.prototype = {
 		$("#mpgDisplay").html(this.app.mpg);
 		$("#costPerGalDisplay").html(this.app.costPerGal);
 
-		$("#milesDisplay").html(this.app.miles);
+		var roundedMiles = Math.round(this.app.miles * 1000)/1000.0
+		$("#milesDisplay").html(roundedMiles);
 		var totalCost = this.app.miles / this.app.mpg * this.app.costPerGal;
 		if (this.app.passengers.length === 0) {
 			$("#perPersonCostContainer").css("display", "none");
@@ -83,7 +85,7 @@ GPSPage.prototype = {
 	},
 
 	setupGPS: function() {
-		var options = {timeout:15000, enableHighAccuracy:true};
+		var options = {timeout:15000, enableHighAccuracy:true, frequency: 5000};
 		this.app.miles = 0;
 		
 		watchID = navigator.geolocation.watchPosition(
