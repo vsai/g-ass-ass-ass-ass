@@ -60,6 +60,9 @@ var venmoHandler = function(){
         addAllEventListeners();
     }.bind(this);
 
+    // contact: The type of contact to use.
+    // noteIn: 
+    // amount: 
     this.makePayment = function(contact, noteIn, amountIn) {
         var method;
         if (this.token === null) {
