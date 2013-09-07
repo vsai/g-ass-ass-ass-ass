@@ -8,21 +8,28 @@
     <script type="text/javascript" charset="utf-8" src="js/App.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/HomePage.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/GPSPage.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/GMapsPage.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/OdometerPage.js"></script>
     <script>
     	$(document).ready(function() {new App()});
     </script> 
 
 
     <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/home.css">
   </head>
 
   <body>
 	<div id="pagesContainer">
 		<div class="page" id="Home">
 			<h1>Home</h1>
-			<div id="gpsLink">GPS link!!!!</div>
+			<div class="homeBtn" id="GPSLink">Use the GPS</div>
+      <div class="homeBtn" id="GMapsLink">Use GMaps to route</div>
+      <div class="homeBtn" id="OdometerLink">Put in Info from Odometer</div>
 		</div>
 		<div class="page" id="Middle">
+      <div id="tmpMiddle"></div>
+    
 			<div class="tabPage" id="edit">
 			</div>
 			

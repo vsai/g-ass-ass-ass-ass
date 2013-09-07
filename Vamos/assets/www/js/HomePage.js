@@ -2,13 +2,13 @@ var HomePage = function(app){
 	this.app = app;
 	this.string = "Home";
 
-	$("#gpsLink").on('click', function() {
-		this.app.switchPage("GPS");
+	$('.homeBtn').on('click', function(e) {
+		var btnId = $(e.target).closest('.homeBtn').attr("id");
+		this.app.switchPage(btnId.replace(/Link$/, ""));
 	}.bind(this));
 }
 
 HomePage.prototype = {
-	// Event Handler for clicks
 	enter: function() {
 		$("#"+this.string).css("display", "block");
 	},

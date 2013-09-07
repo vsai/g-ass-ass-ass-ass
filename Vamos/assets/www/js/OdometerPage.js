@@ -1,12 +1,12 @@
-var GPSPage = function(app){
+var OdometerPage = function(app){
 	this.app = app;
-	this.string = "GPS";
+	this.string = "Odometer";
 }
 
-GPSPage.prototype = {
+OdometerPage.prototype = {
 	enter: function() {
 		$("#Middle").css("display", "block");
-		$("#tmpMiddle").html('On GPS Page');
+		$("#tmpMiddle").html('On Odometer Page');
 		// Handle tabs to show
 	},
 
