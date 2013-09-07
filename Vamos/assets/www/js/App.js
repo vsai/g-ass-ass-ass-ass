@@ -7,6 +7,7 @@ var App = function(){
 		"Odometer": new OdometerPage(this)
 		//"Payment": new PaymentPage(this)
 	};
+	this.reset();
 	this.currPageStr = "Home";
 	this.currPage = this.availablePages[this.currPageStr];
 	this.currPage.enter();
@@ -20,6 +21,12 @@ App.prototype = {
 			this.currPage = this.availablePages[newPageStr];
 			this.currPage.enter();
 		}
+	},
+
+	reset: function() {
+		this.mpg = null;
+		this.costPerGal = null;
+		this.passengers = {};
 	},
 }
 

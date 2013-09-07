@@ -10,4 +10,4 @@ public class Vamos extends DroidGap {
 		super.loadUrl("file:///android_asset/www/vamos.html");
 	}
 
-}
+} 

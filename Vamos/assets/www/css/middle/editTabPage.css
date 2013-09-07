@@ -1,13 +1,19 @@
-#edit ol > li {
-    float: left;
-    display: none;
+#editContent {
+    position: relative;
+    height: 100%;
     width: 70%;
-    text-align: left;
+    float: left;
 }
 
-#edit button {
-    float: left;
+#edit ol > li {
+    position: relative;
+    height: 100%;
+    display: none;
+    text-align: left;
+    margin: auto;
+    text-align: center;
 }
+
 
 #editLocation {
     width: 30%;
@@ -15,10 +21,32 @@
     height: 100%;
 }
 
+#editLocation .editLocContainer {
+    position: relative;
+    height: 33.33%;
+}
+
+.editNav {
+    padding: 50px 0px;
+    display: block;
+}
+
 #editLocation > h3 {
     margin-bottom: 60px;
 }
 
+#editLocation 
 .selectedTitle {
-    color: white;
+    color: blue;
+}
+
+#edit #editBtns {
+    position: absolute;
+    bottom: 100px;
+    width: 100%;
+    margin: auto;
+}
+
+#edit button {
+    margin: 20px;
 }
