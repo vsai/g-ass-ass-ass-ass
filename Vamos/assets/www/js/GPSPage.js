@@ -1,6 +1,9 @@
 var GPSPage = function(app){
 	this.app = app;
 	this.string = "Middle";
+    this.navHTML = "<li class='tab'><a href='#edit'>Edit</a></li>" + 
+				"<li class='tab'><a href='#GPSMain'>GPS Main</a></li>" + 
+				"<li class='tab'><a href='#travelLog'>Travel Log</a></li>";
 }
 
 GPSPage.prototype = {
@@ -14,6 +17,7 @@ GPSPage.prototype = {
 		$("#travelLog").css("display", "block");
 		//Now make sure the nav appears
 		$("#nav").css("display", "block");
+        $("#nav").append(this.navHTML);
 		//Set up easy tabs!
 		$("#Middle").easytabs();
 	},
