@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Justin's Test</title>
+		<link rel="stylesheet" type="text/css" href="../css/tabTest.css">
+		<script src="../js/jquery-2.0.3.js" type="text/javascript"></script>
+		<script src="../js/jquery.easytabs.min.js" type="text/javascript"></script>
+		<script>
+			$(document).ready(function() {
+				$('#tab-container').easytabs();
+			});
+		</script>
+	</head>
+
+	<body>
+		<div id="tab-container" class="tab-container">
+		  <div id="tabs1-html">
+			<h2>HTML Markup for these tabs</h2>
+			<p>Silliness one!</p>
+		  </div>
+		  <div id="tabs1-js">
+			<h2>JS for these tabs</h2>
+			<p>Silliness two!</p>
+		  </div>
+		  <div id="tabs1-css">
+			<h2>CSS Styles for these tabs</h2>
+			<p>Silliness three!</p>
+		  </div>
+		  <ul class='etabs'>
+			<li class='tab'><a href="#tabs1-html">HTML Markup</a></li>
+			<li class='tab'><a href="#tabs1-js">Required JS</a></li>
+			<li class='tab'><a href="#tabs1-css">Example CSS</a></li>
+		    <div style="clear:both;"></div>
+		  </ul>
+		</div>
+	</body>
+</html>
