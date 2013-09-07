@@ -29,17 +29,17 @@ var venmoHandler = function(){
 
         // Callback 
         this.cbs.loadstopCallback = function(event) {
-            //alert('stop: ' + event.url);
+            alert('stop: ' + event.url);
         };
 
         // Callback 
         this.cbs.loaderrorCallback = function(event) {
-            //alert('error: ' + event.message);
+            alert('error: ' + event.message);
         };
 
         // Callback 
         this.cbs.exitCallback = function(event) {
-            //alert(event.type);
+            alert(event.type);
         };
 
         this.cbs.removeAllEventListeners = function() {
