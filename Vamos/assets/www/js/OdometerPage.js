@@ -8,6 +8,8 @@ var OdometerPage = function(app){
 OdometerPage.prototype = {
 	// Event Handler for clicks
 	enter: function() {
+        this.editState = new editTabPage("#odomMain");
+
 		$("#Middle").css("display", "block");
 		//Handle tabs to show
         
@@ -19,6 +21,13 @@ OdometerPage.prototype = {
         $("#nav").append(this.navHTML);
 		//Set up easy tabs!
 		$("#Middle").easytabs();
+        var me = this;
+        $("#Middle").bind('easytabs:after', function(elem, b) {
+            var newTabName = b[0].innerHTML;
+            if (newTabName === "Edit") {
+                me.editState.enter();
+            }
+        })
 	},
 
 	exit: function() {

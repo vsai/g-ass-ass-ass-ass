@@ -6,19 +6,25 @@
 
     <script type="text/javascript" charset="utf-8" src="js/libs/jquery-2.0.3.js"></script>
 	<script type="text/javascript" charset="utf-8" src="js/jquery.easytabs.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/libs/fullscreenBackground.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/App.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/HomePage.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/GPSPage.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/GMapsPage.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/OdometerPage.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/tabPages/edit.js"></script>
     <script>
-    	$(document).ready(function() {new App()});
+    	$(document).ready(function() {
+            new App();
+        });
     </script> 
 
-
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/layout.css">
     <link rel="stylesheet" type="text/css" href="css/home.css">
     <link rel="stylesheet" type="text/css" href="css/middle/navigation.css">
+    <link rel="stylesheet" type="text/css" href="css/middle/GPSMain.css">
+    <link rel="stylesheet" type="text/css" href="css/middle/editTabPage.css">
   </head>
 
   <body>
@@ -35,10 +41,44 @@
 		</div>
 		<div class="page" id="Middle">
 			<div class="tabPage" id="edit">
-				<h1>Edit tab page</h1>
+                <div id="editLocation">
+                    <h3>Price</h3>
+                    <h3>Efficiency</h3>
+                    <h3>Passengers</h3>
+                </div>
+				<ol>
+                    <li>
+                        <h1>Price</h1>
+                        <label for="costPerGallon">Cost per Gallon</label>
+                        <input type="text" id="costPerGallon">
+                    </li>
+                    <li>
+                        <h1>Efficiency</h1>
+                        <label for="mpgInput">MPG</label><br>
+                        <input type="text" id="mpgInput"><br>
+                        <label for="makeInput">Make</label><br>
+                        <input type="text" id="makeInput"><br>
+                        <label for="modelInput">Model</label><br>
+                        <input type="text" id="modelInput">
+                    </li>
+                    <li>
+                        <h1>Passengers</h1>
+                    </li>
+                    <button id="continueEditTab">Continue</button>
+                    <button id="skipEditTab">Skip this shit</button>
+                </ol>
 			</div>
 			<div class="tabPage" id="GPSMain">
-				<h1>GPS Main tab page</h1>
+                <div id="gpsHeader">
+                    <h3>MPG: 15.3</h3>
+                    <h3>$/gal: 3.82</h3>
+                    <div style="clear:both;"></div>
+                </div>
+                <h1>56.8 miles</h1>
+                <h2>$40.31</h2>
+                <h3>$14.81 / person</h3>
+                <button>End Trip</button>
+                
 			</div>
 			<div class="tabPage" id="travelLog">
 				<h1>Travel log tab page</h1>
