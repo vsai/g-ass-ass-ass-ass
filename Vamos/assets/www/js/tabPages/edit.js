@@ -62,20 +62,21 @@ editTabPage.prototype = {
         this.page.app.mpg = this.getMpgInfo();
         this.page.app.costPerGal = this.getCostPerGal();
         this.page.app.passengers = this.getPassengers();
+        this.page.updateUI();
     },
 
     getMpgInfo: function() {
-        if($("#mpgInput").val()) {
+        if($("#mpgInput").val().length > 0) {
             return $("#mpgInput").val();
         }
-        if ($("#makeInput").val() && $("#modelInput").val()) {
+        if ($("#makeInput").val().length > 0 && $("#modelInput").val().length > 0) {
             // Call API to find out mpg and return that
         }
         return 1.0;    //return avg value
     },
 
     getCostPerGal: function() {
-        if ($("#costPerGallon").val()) {
+        if ($("#costPerGallon").val().length > 0) {
             return $("#costPerGallon").val();
         }
         return 1.0;    //return avg value

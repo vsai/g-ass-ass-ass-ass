@@ -5,7 +5,6 @@ var GPSPage = function(app){
 				"<li class='tab'><a href='#GPSMain'>GPS Main</a></li>" + 
 				"<li class='tab'><a href='#travelLog'>Travel Log</a></li>";
 	this.watchID = null;
-    this.latlons = [];
 }
 
 GPSPage.prototype = {
@@ -29,9 +28,11 @@ GPSPage.prototype = {
             if (newTabName === "Edit") {
                 me.editState.enter();
             }
-        })
+        });
 
-        this.setupGPS();
+		this.latlons = [];
+        //this.setupGPS();
+        this.testGPS();
 
         $("#endTripBtn").on("click", function() {
         	if (this.app.passengers.length === 0) {
@@ -47,16 +48,24 @@ GPSPage.prototype = {
 	exit: function() {
 		$("#Middle").css("display", "none");
 		this.endGPS();
-		this.latlons = {};
+		this.latlons = [];
 	},
 
-	setupGPS: function() {
-		/*var options = {timeout:15000, enableHighAccuracy:true};
-		watchID = navigator.geolocation.watchPosition(
-			this.onSuccess,
-			this.onError,
-			options
-		);*/
+	updateUI: function() {
+		$("#mpgDisplay").html(this.app.mpg);
+		$("#costPerGalDisplay").html(this.app.costPerGal);
+
+		$("#milesDisplay").html(this.app.miles);
+		var totalCost = this.app.miles / this.app.mpg * this.app.costPerGal;
+		if (this.app.passengers.length === 0) {
+			$("#perPersonCostContainer").css("display", "none");
+		} else {
+			var costPerPerson = this.app.passengers.length * 1.0;
+			$("#perPersonCostContainer").html(totalCost / costPerPerson);
+		}
+	},
+
+	testGPS: function() {
         var allCoords = this.generateTestData(undefined, true);
         var cities = ["New York", "Philadelphia", "Pittsburgh"];
         for (var i = 0; i < cities.length;i++) {
@@ -65,14 +74,25 @@ GPSPage.prototype = {
                 var curCoord = curCity[j];
                 if (i === 0 && j === 0) this.latlons.push([curCoord.latitude, curCoord.longitude]);
                 else {
-                    this.onSuccess({
-                        coords: curCoord
-                    });
+	            	this.onSuccess({
+	                	coords: curCoord
+	            	});
                 }
             }
         }
-		this.latlons = [];
 	},
+
+	setupGPS: function() {
+		var options = {timeout:15000, enableHighAccuracy:true};
+		this.app.miles = 0;
+		
+		watchID = navigator.geolocation.watchPosition(
+			this.onSuccess.bind(this),
+			this.onError.bind(this),
+			options
+		);
+	},
+
 	endGPS:function() {
 		if (this.watchID != null) {
 			navigator.geolocation.clearWatch(this.watchID);
@@ -81,47 +101,42 @@ GPSPage.prototype = {
 	},
 
 	onSuccess: function(position) {
-        console.log(position);
 		var lat = position.coords.latitude;
 		var lon = position.coords.longitude;
+		if (this.latlons.length === 0) {
+			this.latlons.push([lat,lon]);
+			return;
+		}
 		var prevLatLon = this.latlons[this.latlons.length - 1];
 		var prevLat = prevLatLon[0];
 		var prevLon = prevLatLon[1];
 		if (lat === prevLat && lon === prevLon) return;
 
-		var miles = this.getDistanceFromLatLonInMiles(
+		this.app.miles += this.getDistanceFromLatLonInMiles(
 			prevLat,
 			prevLon,
 			lat,
 			lon);
-        console.log(miles);
-		$("#milesDisplay").html(miles);
-		$("#mpgDisplay").html(this.app.mpg);
-		$("costPerGalDisplay").html(this.app.costPerGal);
 
-		var totalCost = miles / this.app.mpg * this.app.costPerGal;
-		if (this.app.passengers.length === 0) {
-			$("#perPersonCostContainer").css("display", "none");
-		} else {
-			var costPerPerson = this.app.passengers.length * 1.0;
-			$("#perPersonCostContainer").html(totalCost / costPerPerson);
-		}
+		this.updateUI();
+		console.log(this.app.miles);
 
 		this.latlons.push([lat,lon]);
 	},
 
 	onError: function(error) {
-		//alert('AHHHHHHHH');
+      alert('code: '    + error.code    + '\n' +
+            'message: ' + error.message + '\n');
 	},
 
 	getDistanceFromLatLonInMiles: function(lat1,lon1,lat2,lon2) {
 		if (lat1 === lat2 && lon1 === lon2) return 0;
 		var R = 6371; // Radius of the earth in km
-		var dLat = deg2rad(lat2-lat1);  // deg2rad below
-		var dLon = deg2rad(lon2-lon1); 
+		var dLat = this.deg2rad(lat2-lat1);  // deg2rad below
+		var dLon = this.deg2rad(lon2-lon1); 
 		var a = 
 			Math.sin(dLat/2) * Math.sin(dLat/2) +
-			Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+			Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) * 
 			Math.sin(dLon/2) * Math.sin(dLon/2);
 
 		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 

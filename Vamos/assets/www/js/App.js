@@ -30,6 +30,7 @@ App.prototype = {
 		this.costPerGal = null;
 		this.passengers = {};
 		this.perPersonCost = null;
+		this.miles = null;
 	},
 }
 
