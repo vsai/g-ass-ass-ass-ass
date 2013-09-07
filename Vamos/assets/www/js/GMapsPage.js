@@ -8,6 +8,8 @@ var GMapsPage = function(app){
 GMapsPage.prototype = {
 	// Event Handler for clicks
 	enter: function() {
+        this.editState = new editTabPage("#GMapsMain");
+
 		$("#Middle").css("display", "block");
 		//Handle tabs to show
         
@@ -19,6 +21,13 @@ GMapsPage.prototype = {
         $("#nav").append(this.navHTML);
 		//Set up easy tabs!
 		$("#Middle").easytabs();
+        var me = this;
+        $("#Middle").bind('easytabs:after', function(elem, b) {
+            var newTabName = b[0].innerHTML;
+            if (newTabName === "Edit") {
+                me.editState.enter();
+            }
+        })
 	},
 
 	exit: function() {
