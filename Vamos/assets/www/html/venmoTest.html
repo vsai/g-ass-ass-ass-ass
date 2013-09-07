@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Venmo Test</title>
+    
+    <script type="text/javascript" charset="utf-8" src="../js/libs/jquery-2.0.3.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../js/API/api.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../js/libs/cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        var vhandler = new venmoHandler();
+    
+        // device APIs are available
+        function onDeviceReady() {
+		    alert("On device ready huh");      
+
+            vhandler.venmoConnect();
+      	    document.getElementById('geolocation').innerHTML = 'Ready to watch!';
+        } 
+    </script>
+  </head>
+  <body>
+    <p id="geolocation">Device not ready yet</p>
+  </body>
+</html>
