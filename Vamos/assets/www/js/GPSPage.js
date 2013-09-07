@@ -30,8 +30,9 @@ GPSPage.prototype = {
             if (newTabName === "Edit") {
                 me.editState.enter();
             }
-        })
+        });
 
+		this.latlons = [];
         this.setupGPS();
 
         $("#endTripBtn").on("click", function() {
@@ -48,17 +49,32 @@ GPSPage.prototype = {
 	exit: function() {
 		$("#Middle").css("display", "none");
 		this.endGPS();
-		this.latlons = {};
+		this.latlons = [];
+	},
+
+	updateUI: function() {
+		$("#mpgDisplay").html(this.app.mpg);
+		$("#costPerGalDisplay").html(this.app.costPerGal);
+
+		$("#milesDisplay").html(this.app.miles);
+		var totalCost = this.app.miles / this.app.mpg * this.app.costPerGal;
+		if (this.app.passengers.length === 0) {
+			$("#perPersonCostContainer").css("display", "none");
+		} else {
+			var costPerPerson = this.app.passengers.length * 1.0;
+			$("#perPersonCostContainer").html(totalCost / costPerPerson);
+		}
 	},
 
 	setupGPS: function() {
+		
 		var options = {timeout:15000, enableHighAccuracy:true};
+		this.app.miles = 0;
 		watchID = navigator.geolocation.watchPosition(
-			this.onSuccess,
-			this.onError,
+			this.onSuccess.bind(this),
+			this.onError.bind(this),
 			options
 		);
-		this.latlons = {}
 
 	},
 	endGPS:function() {
@@ -69,47 +85,43 @@ GPSPage.prototype = {
 	},
 
 	onSuccess: function(position) {
-		alert("hello");
 		var lat = position.coords.latitude;
 		var lon = position.coords.longitude;
+		alert("lat, lon: " + lat + ", " + lon);
+		if (this.latlons.length === 0) {
+			this.latlons.push([lat,lon]);
+			return;
+		}
 		var prevLatLon = this.latlons[this.latlons.length - 1];
 		var prevLat = prevLatLon[0];
 		var prevLon = prevLatLon[1];
 		if (lat === prevLat && lon === prevLon) return;
 
-		var miles = this.getDistanceFromLatLonInMiles(
+		this.app.miles += this.getDistanceFromLatLonInMiles(
 			prevLat,
 			prevLon,
 			lat,
-			lons);
+			lon);
 
-		$("#milesDisplay").html(miles);
-		$("#mpgDisplay").html(this.app.mpg);
-		$("costPerGalDisplay").html(this.app.costPerGal);
-
-		var totalCost = miles / this.app.mpg * this.app.costPerGal;
-		if (this.app.passengers.length === 0) {
-			$("#perPersonCostContainer").css("display", "none");
-		} else {
-			var costPerPerson = this.app.passengers.length * 1.0;
-			$("#perPersonCostContainer").html(totalCost / costPerPerson);
-		}
+		this.updateUI();
 
 		this.latlons.push([lat,lon]);
 	},
 
 	onError: function(error) {
-		alert('AHHHHHHHH');
+      alert('code: '    + error.code    + '\n' +
+            'message: ' + error.message + '\n');
+
 	},
 
 	getDistanceFromLatLonInMiles: function(lat1,lon1,lat2,lon2) {
 		if (lat1 === lat2 && lon1 === lon2) return 0;
 		var R = 6371; // Radius of the earth in km
-		var dLat = deg2rad(lat2-lat1);  // deg2rad below
-		var dLon = deg2rad(lon2-lon1); 
+		var dLat = this.deg2rad(lat2-lat1);  // deg2rad below
+		var dLon = this.deg2rad(lon2-lon1); 
 		var a = 
 			Math.sin(dLat/2) * Math.sin(dLat/2) +
-			Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+			Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) * 
 			Math.sin(dLon/2) * Math.sin(dLon/2);
 
 		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
