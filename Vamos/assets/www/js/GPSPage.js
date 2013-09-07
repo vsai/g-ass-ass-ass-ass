@@ -8,6 +8,8 @@ var GPSPage = function(app){
 
 GPSPage.prototype = {
 	enter: function() {
+        this.editState = new editTabPage("#GPSMain");
+
 		$("#Middle").css("display", "block");
 		// Handle tabs to show
 		
@@ -20,6 +22,13 @@ GPSPage.prototype = {
         $("#nav").append(this.navHTML);
 		//Set up easy tabs!
 		$("#Middle").easytabs();
+        var me = this;
+        $("#Middle").bind('easytabs:after', function(elem, b) {
+            var newTabName = b[0].innerHTML;
+            if (newTabName === "Edit") {
+                me.editState.enter();
+            }
+        })
 	},
 
 	exit: function() {

@@ -1,0 +1,28 @@
+#gpsHeader {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+#gpsHeader > h3 {
+    float: right;
+}
+
+#gpsHeader > h3:first-child {
+    float: left;
+}
+
+#GPSMain > h1 {
+    margin: 30px auto 0px auto;
+    padding-bottom: 10px;
+    width: 50%;
+    border-bottom: 1px solid black;
+}
+
+#GPSMain > h2 {
+    padding-top: 10px;
+}
+
+#GPSMain > button {
+    margin-top: 40%;
+}

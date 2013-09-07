@@ -1,0 +1,24 @@
+#edit ol > li {
+    float: left;
+    display: none;
+    width: 70%;
+    text-align: left;
+}
+
+#edit button {
+    float: left;
+}
+
+#editLocation {
+    width: 30%;
+    float: left;
+    height: 100%;
+}
+
+#editLocation > h3 {
+    margin-bottom: 60px;
+}
+
+.selectedTitle {
+    color: white;
+}
