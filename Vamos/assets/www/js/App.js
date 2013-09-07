@@ -3,9 +3,9 @@ var App = function(){
 	{
 		"Home": new HomePage(this),
 		"GPS": new GPSPage(this),
-		"GMaps": new GMapsPage(this),
+		/*"GMaps": new GMapsPage(this),
 		"Odometer": new OdometerPage(this),
-		"Payment": new PaymentPage(this)
+		"Payment": new PaymentPage(this)*/
 	};
 	this.currPageStr = "Home";
 	this.currPage = this.availablePages[this.currPageStr];
