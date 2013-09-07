@@ -3,35 +3,22 @@
   <head>
     <title>PhoneGap Sample</title>
     
-    <script type="text/javascript" charset="utf-8" src="js/jquery-2.0.3.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/libs/jquery-2.0.3.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/API/api.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/libs/cordova.js"></script>
     <script type="text/javascript" charset="utf-8">
-
     document.addEventListener("deviceready", onDeviceReady, false);
+
+    var vhandler = new venmoHandler();
     
     // device APIs are available
-    
     function onDeviceReady() {
-      
-      var venmoAuthLink = 'https://api.venmo.com/oauth/authorize?client_id=1340&scope=access_feed,access_profile,access_friends,make_payments&response_type=token';
-      var ref = window.open(venmoAuthLink, '_blank', 'location=yes');
-      ref.addEventListener('loadstart', function(event) { 
-      							if (event.url.indexOf('www.google.com') !== -1) {
-      								alert('need to take this url and close the window: ' + event.url);
-      								ref.close();
-      							}
-      						});      						
-      ref.addEventListener('loadstop', function(event) { 
-      							//alert('stop: ' + event.url);
-      						});
-      ref.addEventListener('loaderror', function(event) { 
-      							alert('error: ' + event.message);
-      						});
-      ref.addEventListener('exit', function(event) { 
-      							//alert(event.type);
-      						});
-      
-      //document.getElementById('geolocation').innerHTML = 'Ready to watch!';
+		alert("On device ready huh");      
+
+        vhandler.venmoConnect();
+        //alert(vhandler.token);
+ 
+      	document.getElementById('geolocation').innerHTML = 'Ready to watch!';
     }
     
     var watchID = null;
@@ -116,9 +103,8 @@
     <div id="stopBtn"
       style="padding: 5px; background-color: #aaaaaa; width: 100px; margin: 5px;"
       onclick="stopWatching()">Stop</div>
-    <div>Miles Traveled: <span id="miles">??</span>
+    <div>Miles Traveled: <span id="miles">??</span></div>
       
     <p id="geolocation">Device not ready yet</p>
-    <a href="html/test.html">Test</a>
   </body>
 </html>
