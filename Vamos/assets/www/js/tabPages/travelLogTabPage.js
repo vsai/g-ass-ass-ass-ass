@@ -1,6 +1,7 @@
 var travelLogTabPage = function(page){
     this.page = page;
     this.mostRecentCity = "";
+    this.mostRecentState = "";
     this.distanceTravelledInCity = 0;
 }
 
@@ -19,15 +20,32 @@ travelLogTabPage.prototype = {
                         if(ac.types.indexOf("locality") >= 0) city = ac.long_name;
                         if(ac.types.indexOf("administrative_area_level_1") >= 0) state = ac.long_name;
                     }
+                    //console.log(city + ", " + state);
                     //only report if we got Good Stuff
-                    if(city != '' && state != '') {
-                        console.log("Hello to you out there in "+city+", "+state+"!");
+                    if (this.mostRecentCity === "" || this.mostRecentState === "") {
+                        this.mostRecentCity = city;
+                        this.mostRecentState = state;
                     }
+                    else {
+                        if(city !== this.mostRecentCity || state !== this.mostRecentState) {
+                            //PUSH THE OLD CITY INFO
+                            // console.log(this.mostRecentCity + ", " + this.mostRecentState);
+                            // console.log(this.distanceTravelledInCity);
+                            this.distanceTravelledInCity = 0;
+                            this.mostRecentCity = city;
+                            this.mostRecentState = state;
+                        }
+                    }
+                    $(".currentCity").html("Current City: " + this.mostRecentCity + ", " + this.mostRecentState);
                 } 
                 else {
                     console.log('No results found: ' + status);
                 }
-            });
+            }.bind(this));
         }
+    },
+    
+    increaseCityMileage: function(incr) {
+        this.distanceTravelledInCity += incr;
     }
 }

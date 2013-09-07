@@ -22,24 +22,24 @@ var venmoHandler = function(){
                 this.ref.close();
                 this.cbs.removeAllEventListeners();
                 this.ref = null;
-                alert('save url, close the window: ' + event.url);
+                //alert('save url, close the window: ' + event.url);
                 alert(this.token);
             }
         }.bind(this);
 
         // Callback 
         this.cbs.loadstopCallback = function(event) {
-            alert('stop: ' + event.url);
+            //alert('stop: ' + event.url);
         };
 
         // Callback 
         this.cbs.loaderrorCallback = function(event) {
-            alert('error: ' + event.message);
+            //alert('error: ' + event.message);
         };
 
         // Callback 
         this.cbs.exitCallback = function(event) {
-            alert(event.type);
+            //alert(event.type);
         };
 
         this.cbs.removeAllEventListeners = function() {

@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
         <script type="text/javascript" charset="utf-8" src="../js/libs/jquery-2.0.3.js"></script>
-        <!--<script type="text/javascript" charset="utf-8" src="../js/libs/cordova.js"></script>-->
+        <script type="text/javascript" charset="utf-8" src="../js/libs/cordova.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/jquery.easytabs.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/API/api.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/libs/fullscreenBackground.js"></script>
@@ -17,6 +17,14 @@
         <script type="text/javascript" charset="utf-8" src="../js/tabPages/edit.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/tabPages/travelLogTabPage.js"></script>
         <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+        <script>
+            window.deviceReady = false;
+            document.addEventListener('deviceready', onDeviceReady, false);
+            function onDeviceReady() {
+                //alert("Device is rrrrrrrrready!");
+                window.deviceReady = true;
+            }
+        </script>
         <script>
         	$(document).ready(function() {
                 new App();
@@ -83,12 +91,13 @@
                     <h1><span id="milesDisplay"></span> miles</h1>
                     <h2>$<span id="totalCostDisplay"></span></h2>
                     <h3 id="perPersonCostContainer">$<span id="perPersonCostDisplay">14.81</span> / person</h3>
+                    <h3 class="currentCity">Current City: </h3>
                     <button id="endTripBtn">End Trip</button>
                     
           			</div>
           			
                 <div class="tabPage" id="travelLog">
-                    <h1>Travel log tab page</h1>
+                    <h1 class="currentCity">Travel log tab page</h1>
                 </div>
                 <div class="tabPage" id="GMapsMain">
                     <label for="startDest">Start Location</label><br>
