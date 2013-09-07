@@ -1,11 +1,33 @@
 .page #Home{
-	margin: auto;
+    box-sizing: border-box;
 
 }
 
-.homeBtn{
-	width: 100px;
-	height: 100px;
+.btnBlock{
+    position: relative;
+	width: 300px;
+	height: 200px;
 	border: 1px solid black;
-	
+    margin: 30px auto;
+}
+
+.homeBtn{
+    border-radius: 15px;
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    width: 45%;
+}
+
+#GMapsLink {
+    left: 0px;
+}
+
+#OdometerLink {
+    right: 0px;
+}
+
+#GPSLink {
+    width:100%;
 }

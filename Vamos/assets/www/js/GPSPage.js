@@ -6,7 +6,6 @@ var GPSPage = function(app){
 GPSPage.prototype = {
 	enter: function() {
 		$("#Middle").css("display", "block");
-		$("#tmpMiddle").html('On GPS Page');
 		// Handle tabs to show
 		
 		//Now we need to set up the nav bar and the appropriate pages
