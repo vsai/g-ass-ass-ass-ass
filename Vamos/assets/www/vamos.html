@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Vamos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <script type="text/javascript" charset="utf-8" src="js/libs/jquery-2.0.3.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/jquery.easytabs.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/App.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/HomePage.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/GPSPage.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/GMapsPage.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/OdometerPage.js"></script>
+    <script>
+    	$(document).ready(function() {new App()});
+    </script> 
+
+
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="css/home.css">
+    <link rel="stylesheet" type="text/css" href="css/middle/navigation.css">
+  </head>
+
+  <body>
+	<div id="pagesContainer">
+		<div class="page" id="Home">
+			<h1>Home</h1>
+      <div class="btnBlock">
+        <div class="homeBtn" id="GPSLink">Use the GPS</div>
+      </div>
+      <div class="btnBlock">
+        <div class="homeBtn" id="GMapsLink">Use GMaps to route</div>
+        <div class="homeBtn" id="OdometerLink">Put in Info from Odometer</div>
+      </div>
+		</div>
+		<div class="page" id="Middle">
+			<div class="tabPage" id="edit">
+				<h1>Edit tab page</h1>
+			</div>
+			<div class="tabPage" id="GPSMain">
+				<h1>GPS Main tab page</h1>
+			</div>
+			<div class="tabPage" id="travelLog">
+				<h1>Travel log tab page</h1>
+			</div>
+			<div class="tabPage" id="GMapsMain">
+				<h1>Gmaps main tab page</h1>
+			</div>
+			<div class="tabPage" id="odomMain">
+				<h1>Odom main tab page</h1>
+			</div>
+
+			<ul id="nav">
+				
+			</ul>
+		</div>
+	</div>
+  </body>
+</html>
+

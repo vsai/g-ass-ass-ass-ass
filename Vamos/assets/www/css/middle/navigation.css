@@ -1,8 +1,4 @@
-body {
-	margin: 0px;
-}
-
-.etabs {
+#nav {
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -18,11 +14,17 @@ body {
 	/*zoom:1; *display:inline;*/
 	background: #eee;
 	border: solid 1px #999;
+    text-align: center;
 	/*-moz-border-radius: 4px 4px 0 0;
 	-webkit-border-radius: 4px 4px 0 0;*/
 }
 
+.tab.onlyTwoTabs {
+    width: 50%;
+}
+
 .tab a {
+    text-decoration: none;
 	font-size: 14px;
 	line-height: 2em;
 	display: block;
@@ -36,12 +38,4 @@ body {
 	top: 1px;
 	border-color: #666;
 	border-top: none;
-}
-
-.tab-container .panel-container {
-	background: #fff;
-	border: solid #666 1px;
-	padding: 10px;
-	/*-moz-border-radius: 0 4px 4px 4px;
-	-webkit-border-radius: 0 4px 4px 4px;*/
 }
