@@ -2,17 +2,21 @@ var editTabPage = function(nextTabId, page) {
     this.nextTabId = nextTabId;
     this.page = page;
     this.pageIndex = 0;
-    var me = this;
+
     this.setToOriginal();
+
     $("#continueEditBtn").on("click", function() {
-        me.switchTo(me.pageIndex + 1);
-    });
+        this.switchTo(this.pageIndex + 1);
+        this.updateAppInfo();
+    }.bind(this));
     $("#skipEditBtn").on("click", function() {
-        me.exit();
-    });
+        this.exit();
+        this.updateAppInfo();
+    }.bind(this));
     $(".editNav").on("click", function(e) {
         var newIndexId = $(e.target).closest('.editNav').attr('id');
         this.switchTo(newIndexId.charAt(newIndexId.length - 1));
+        this.updateAppInfo();
     }.bind(this));
 }
 
@@ -56,6 +60,8 @@ editTabPage.prototype = {
 
     updateAppInfo: function() {
         this.page.app.mpg = this.getMpgInfo();
+        this.page.app.costPerGal = this.getCostPerGal();
+        this.page.app.passengers = this.getPassengers();
     },
 
     getMpgInfo: function() {
@@ -65,6 +71,17 @@ editTabPage.prototype = {
         if ($("#makeInput").val() && $("#modelInput").val()) {
             // Call API to find out mpg and return that
         }
-        return null;
-    }
+        return 1.0;    //return avg value
+    },
+
+    getCostPerGal: function() {
+        if ($("#costPerGallon").val()) {
+            return $("#costPerGallon").val();
+        }
+        return 1.0;    //return avg value
+    },
+
+    getPassengers: function() {
+        return {};
+    },
 }

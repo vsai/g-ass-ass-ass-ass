@@ -27,6 +27,7 @@ App.prototype = {
 		this.mpg = null;
 		this.costPerGal = null;
 		this.passengers = {};
+		this.perPersonCost = null;
 	},
 }
 

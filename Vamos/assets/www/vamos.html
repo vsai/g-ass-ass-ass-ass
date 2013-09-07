@@ -7,12 +7,14 @@
         <script type="text/javascript" charset="utf-8" src="js/libs/jquery-2.0.3.js"></script>
     	   <script type="text/javascript" charset="utf-8" src="js/jquery.easytabs.js"></script>
         <script type="text/javascript" charset="utf-8" src="js/libs/fullscreenBackground.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/libs/cordova.js"></script>
         <script type="text/javascript" charset="utf-8" src="js/App.js"></script>
         <script type="text/javascript" charset="utf-8" src="js/HomePage.js"></script>
         <script type="text/javascript" charset="utf-8" src="js/GPSPage.js"></script>
         <script type="text/javascript" charset="utf-8" src="js/GMapsPage.js"></script>
         <script type="text/javascript" charset="utf-8" src="js/OdometerPage.js"></script>
         <script type="text/javascript" charset="utf-8" src="js/tabPages/edit.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/tabPages/travelLogTabPage.js"></script>
         <script>
         	$(document).ready(function() {
                 new App();
@@ -66,20 +68,20 @@
                         </li>
                         <div id="editBtns">
                             <button id="continueEditBtn">Continue</button>
-                            <button id="skipEditBtn">Skip this shit</button>
+                            <button id="skipEditBtn">Use Default For Now</button>
                         </div>
                     </ol>
                 </div>
                 <div class="tabPage" id="GPSMain">
                     <div id="gpsHeader">
-                        <h3>MPG: 15.3</h3>
-                        <h3>$/gal: 3.82</h3>
+                        <h3>MPG: <span id="mpgDiplay">15.3</span></h3>
+                        <h3>$/gal:<span id="costPerGalDisplay">3.82</span></h3>
                         <div style="clear:both;"></div>
                     </div>
-                    <h1>56.8 miles</h1>
-                    <h2>$40.31</h2>
-                    <h3>$14.81 / person</h3>
-                    <button>End Trip</button>
+                    <h1><span id="milesDisplay">56.8</span> miles</h1>
+                    <h2>$<span id="totalCostDisplay">40.31</span></h2>
+                    <h3 id="perPersonCostContainer">$<span id="perPersonCostDisplay">14.81</span> / person</h3>
+                    <button id="endTripBtn">End Trip</button>
                     
           			</div>
           			
