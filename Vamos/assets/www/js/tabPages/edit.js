@@ -1,57 +1,70 @@
-var editTabPage = function(returnTo) {
-    this.returnTo = returnTo;
+var editTabPage = function(nextTabId, page) {
+    this.nextTabId = nextTabId;
+    this.page = page;
     this.pageIndex = 0;
     var me = this;
     this.setToOriginal();
-    $("#continueEditTab").on("click", function() {
-        me.pageIndex += 1;
-        me.switchTo(me.pageIndex);
+    $("#continueEditBtn").on("click", function() {
+        me.switchTo(me.pageIndex + 1);
     });
-    $("#skipEditTab").on("click", function() {
+    $("#skipEditBtn").on("click", function() {
         me.exit();
     });
+    $(".editNav").on("click", function(e) {
+        var newIndexId = $(e.target).closest('.editNav').attr('id');
+        this.switchTo(newIndexId.charAt(newIndexId.length - 1));
+    }.bind(this));
 }
 
 editTabPage.prototype = {
     enter: function() {
-        this.pageIndex = 0;
-        var index = this.pageIndex + 1;
-        var firstElem = $("#edit ol li:nth-of-type(" + index + ")");
+        var firstElem = $("#editContent"+this.pageIndex);
         $(firstElem).css("display", "block");
         
-        var title = $("#editLocation > h3:nth-of-type(" + index + ")");
+        var title = $("#editLocation #edit"+this.pageIndex);
         $(title).addClass("selectedTitle");
     },
     
     switchTo: function(newIndex) {
-        var index = newIndex + 1;
-        if (index > 3) {
+        newIndex = newIndex * 1;    // make sure it's int
+        if (newIndex >= 3) {
             this.exit();
         }
         else {
-            var oldElem = $("#edit ol li:nth-of-type(" + newIndex + ")");
-            var newElem = $("#edit ol li:nth-of-type(" + index + ")");
+            var oldElem = $("#editContent"+this.pageIndex);
+            var newElem = $("#editContent"+newIndex);
             $("#edit ol li").css("display", "none");
             $(newElem).css("display", "block");
             
-            
-            $("#editLocation > h3").removeClass("selectedTitle");
-            var title = $("#editLocation > h3:nth-of-type(" + index + ")");
-            $(title).addClass("selectedTitle");
+            $("#edit"+this.pageIndex).removeClass("selectedTitle");
+            $("#edit"+newIndex).addClass("selectedTitle");
+            this.pageIndex = newIndex;
         }
     },
     
     exit: function() {
-        var returnTo = this.returnTo;
-        $("#Middle").easytabs("select", returnTo); 
+        $("#Middle").easytabs("select", this.nextTabId);
         var me = this;
-        setTimeout(function() {me.setToOriginal()}, 1000);
     },
     
     setToOriginal: function() {
         $("#edit ol li").css("display", "none");
-        $("#editLocation > h3").removeClass("selectedTitle");
-        $("#edit ol li:first-child").css("display", "block");
-        $("#editLocation > h3:first-child").addClass("selectedTitle");
+        $("#editLocation .editNav").removeClass("selectedTitle");
+        $("#editContent0").css("display", "block");
+        $("#edit0").addClass("selectedTitle");
+    },
+
+    updateAppInfo: function() {
+        this.page.app.mpg = this.getMpgInfo();
+    },
+
+    getMpgInfo: function() {
+        if($("#mpgInput").val()) {
+            return $("#mpgInput").val();
+        }
+        if ($("#makeInput").val() && $("#modelInput").val()) {
+            // Call API to find out mpg and return that
+        }
+        return null;
     }
 }

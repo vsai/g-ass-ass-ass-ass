@@ -3,7 +3,7 @@
 }
 
 html, body, #pagesContainer, .page, .tabPage {
-    height: 100%;
+    height:100%;
 }
 
 body {
@@ -14,7 +14,7 @@ body {
 
 #pagesContainer {
     /*background: rgb(25,25,112);*/
-    background: orange;
+    /*background: orange;*/
 }
 
 .page {
@@ -44,7 +44,8 @@ h5{
 }
 
 button {
-    padding: 10px 15px;
+    width: 150px;
+    height: 50px;
     background: #4479BA;
     color: #FFF;
     -webkit-border-radius: 4px;

@@ -1,108 +1,111 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Vamos</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <head>
+        <title>Vamos</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <script type="text/javascript" charset="utf-8" src="js/libs/jquery-2.0.3.js"></script>
-	<script type="text/javascript" charset="utf-8" src="js/jquery.easytabs.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/libs/fullscreenBackground.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/App.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/HomePage.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/GPSPage.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/GMapsPage.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/OdometerPage.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/tabPages/edit.js"></script>
-    <script>
-    	$(document).ready(function() {
-            new App();
-        });
-    </script> 
+        <script type="text/javascript" charset="utf-8" src="js/libs/jquery-2.0.3.js"></script>
+    	   <script type="text/javascript" charset="utf-8" src="js/jquery.easytabs.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/libs/fullscreenBackground.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/App.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/HomePage.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/GPSPage.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/GMapsPage.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/OdometerPage.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/tabPages/edit.js"></script>
+        <script>
+        	$(document).ready(function() {
+                new App();
+            });
+        </script> 
 
-    <link rel="stylesheet" type="text/css" href="css/reset.css">
-    <link rel="stylesheet" type="text/css" href="css/layout.css">
-    <link rel="stylesheet" type="text/css" href="css/home.css">
-    <link rel="stylesheet" type="text/css" href="css/middle/navigation.css">
-    <link rel="stylesheet" type="text/css" href="css/middle/GPSMain.css">
-    <link rel="stylesheet" type="text/css" href="css/middle/editTabPage.css">
-  </head>
+        <link rel="stylesheet" type="text/css" href="css/reset.css">
+        <link rel="stylesheet" type="text/css" href="css/layout.css">
+        <link rel="stylesheet" type="text/css" href="css/home.css">
+        <link rel="stylesheet" type="text/css" href="css/middle/navigation.css">
+        <link rel="stylesheet" type="text/css" href="css/middle/GPSMain.css">
+        <link rel="stylesheet" type="text/css" href="css/middle/editTabPage.css">
+    </head>
 
-  <body>
-	<div id="pagesContainer">
-		<div class="page" id="Home">
-      <div id="appHeader">Vamos</div>
-      <div class="btnBlock">
-        <div class="homeBtn" id="GPSLink">Use the GPS</div>
-      </div>
-      <div class="btnBlock">
-        <div class="homeBtn" id="GMapsLink">Use GMaps to route</div>
-        <div class="homeBtn" id="OdometerLink">Put in Info from Odometer</div>
-      </div>
-		</div>
-		<div class="page" id="Middle">
-			<div class="tabPage" id="edit">
-                <div id="editLocation">
-                    <h3>Price</h3>
-                    <h3>Efficiency</h3>
-                    <h3>Passengers</h3>
+    <body>
+        <div id="pagesContainer">
+    		    <div class="page" id="Home">
+                <div id="appHeader">Vamos</div>
+                <div class="btnBlock">
+                    <div class="homeBtn" id="GPSLink">Use the GPS</div>
                 </div>
-				<ol>
-                    <li>
-                        <h1>Price</h1>
-                        <label for="costPerGallon">Cost per Gallon</label>
-                        <input type="text" id="costPerGallon">
-                    </li>
-                    <li>
-                        <h1>Efficiency</h1>
-                        <label for="mpgInput">MPG</label><br>
-                        <input type="text" id="mpgInput"><br>
-                        <label for="makeInput">Make</label><br>
-                        <input type="text" id="makeInput"><br>
-                        <label for="modelInput">Model</label><br>
-                        <input type="text" id="modelInput">
-                    </li>
-                    <li>
-                        <h1>Passengers</h1>
-                    </li>
-                    <button id="continueEditTab">Continue</button>
-                    <button id="skipEditTab">Skip this shit</button>
-                </ol>
-			</div>
-			<div class="tabPage" id="GPSMain">
-                <div id="gpsHeader">
-                    <h3>MPG: 15.3</h3>
-                    <h3>$/gal: 3.82</h3>
-                    <div style="clear:both;"></div>
+                <div class="btnBlock">
+                    <div class="homeBtn" id="GMapsLink">Use GMaps to route</div>
+                    <div class="homeBtn" id="OdometerLink">Put in Info from Odometer</div>
                 </div>
-                <h1>56.8 miles</h1>
-                <h2>$40.31</h2>
-                <h3>$14.81 / person</h3>
-                <button>End Trip</button>
-                
-			</div>
-			<div class="tabPage" id="travelLog">
-				<h1>Travel log tab page</h1>
-			</div>
-			<div class="tabPage" id="GMapsMain">
-				<label for="startDest">Start Location</label><br>
-                <input type="text" id="mpgInput"><br>
-                <label for="endDest">End Location</label><br>
-                <input type="text" id="endDest"><br>
-			</div>
-			<div class="tabPage" id="odomMain">
-				<label for="milesTravelled">Miles Travelled</label><br>
-                <input type="text" id="milesTravelled"><br>
-                <label for="startMileage">Starting Mileage</label><br>
-                <input type="text" id="makeInput"><br>
-                <label for="endMileage">End Mileage</label><br>
-                <input type="text" id="endMileage"><br>
-			</div>
+      	    </div>
+        		<div class="page" id="Middle">
+                <div class="tabPage" id="edit">
+                    <div id="editLocation">
+                        <div class="editLocContainer"><h3 class="editNav" id="edit0">Price</h3></div>
+                        <div class="editLocContainer"><h3 class="editNav" id="edit1">Efficiency</h3></div>
+                        <div class="editLocContainer"><h3 class="editNav" id="edit2">Passengers</h3></div>
+                    </div>
+    				        <ol id="editContent">
+                        <li id="editContent0">
+                            <h1>Price</h1>
+                            <label for="costPerGallon">Cost per Gallon</label>
+                            <input type="text" id="costPerGallon">
+                        </li>
+                        <li id="editContent1">
+                            <h1>Efficiency</h1>
+                            <label for="mpgInput">MPG</label><br>
+                            <input type="text" id="mpgInput"><br>
+                            <label for="makeInput">Make</label><br>
+                            <input type="text" id="makeInput"><br>
+                            <label for="modelInput">Model</label><br>
+                            <input type="text" id="modelInput">
+                        </li>
+                        <li id="editContent2">
+                            <h1>Passengers</h1>
+                        </li>
+                        <div id="editBtns">
+                            <button id="continueEditBtn">Continue</button>
+                            <button id="skipEditBtn">Skip this shit</button>
+                        </div>
+                    </ol>
+                </div>
+                <div class="tabPage" id="GPSMain">
+                    <div id="gpsHeader">
+                        <h3>MPG: 15.3</h3>
+                        <h3>$/gal: 3.82</h3>
+                        <div style="clear:both;"></div>
+                    </div>
+                    <h1>56.8 miles</h1>
+                    <h2>$40.31</h2>
+                    <h3>$14.81 / person</h3>
+                    <button>End Trip</button>
+                    
+          			</div>
+          			
+                <div class="tabPage" id="travelLog">
+                    <h1>Travel log tab page</h1>
+                </div>
+                <div class="tabPage" id="GMapsMain">
+                    <label for="startDest">Start Location</label><br>
+                    <input type="text" id="mpgInput"><br>
+                    <label for="endDest">End Location</label><br>
+                    <input type="text" id="endDest"><br>
+                </div>
+                <div class="tabPage" id="odomMain">
+                    <label for="milesTravelled">Miles Travelled</label><br>
+                    <input type="text" id="milesTravelled"><br>
+                    <label for="startMileage">Starting Mileage</label><br>
+                    <input type="text" id="makeInput"><br>
+                    <label for="endMileage">End Mileage</label><br>
+                    <input type="text" id="endMileage"><br>
+                </div>
 
-			<ul id="nav">
-				
-			</ul>
-		</div>
-	</div>
-  </body>
+          			<ul id="nav">
+    				
+                </ul>
+    		    </div>
+        </div>
+    </body>
 </html>
 
