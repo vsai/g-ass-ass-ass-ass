@@ -5,6 +5,7 @@ var GPSPage = function(app){
 				"<li class='tab'><a href='#GPSMain'>GPS Main</a></li>" + 
 				"<li class='tab'><a href='#travelLog'>Travel Log</a></li>";
 	this.watchID = null;
+    this.latlons = [];
 }
 
 GPSPage.prototype = {
@@ -13,8 +14,6 @@ GPSPage.prototype = {
         this.travelLog = new travelLogTabPage(this);
         this.editState.enter();
 		$("#Middle").css("display", "block");
-		// Handle tabs to show
-		
 		//Now we need to set up the nav bar and the appropriate pages
 		$("#GPSMain").css("display", "block");
 		$("#edit").css("display", "block");
@@ -52,14 +51,27 @@ GPSPage.prototype = {
 	},
 
 	setupGPS: function() {
-		var options = {timeout:15000, enableHighAccuracy:true};
+		/*var options = {timeout:15000, enableHighAccuracy:true};
 		watchID = navigator.geolocation.watchPosition(
 			this.onSuccess,
 			this.onError,
 			options
-		);
-		this.latlons = {}
-
+		);*/
+        var allCoords = this.generateTestData(undefined, true);
+        var cities = ["New York", "Philadelphia", "Pittsburgh"];
+        for (var i = 0; i < cities.length;i++) {
+            var curCity = allCoords[cities[i]];
+            for (var j = 0; j < curCity.length; j++) {
+                var curCoord = curCity[j];
+                if (i === 0 && j === 0) this.latlons.push([curCoord.latitude, curCoord.longitude]);
+                else {
+                    this.onSuccess({
+                        coords: curCoord
+                    });
+                }
+            }
+        }
+		this.latlons = [];
 	},
 	endGPS:function() {
 		if (this.watchID != null) {
@@ -69,7 +81,7 @@ GPSPage.prototype = {
 	},
 
 	onSuccess: function(position) {
-		alert("hello");
+        console.log(position);
 		var lat = position.coords.latitude;
 		var lon = position.coords.longitude;
 		var prevLatLon = this.latlons[this.latlons.length - 1];
@@ -81,8 +93,8 @@ GPSPage.prototype = {
 			prevLat,
 			prevLon,
 			lat,
-			lons);
-
+			lon);
+        console.log(miles);
 		$("#milesDisplay").html(miles);
 		$("#mpgDisplay").html(this.app.mpg);
 		$("costPerGalDisplay").html(this.app.costPerGal);
@@ -99,7 +111,7 @@ GPSPage.prototype = {
 	},
 
 	onError: function(error) {
-		alert('AHHHHHHHH');
+		//alert('AHHHHHHHH');
 	},
 
 	getDistanceFromLatLonInMiles: function(lat1,lon1,lat2,lon2) {
@@ -119,7 +131,49 @@ GPSPage.prototype = {
 
 	deg2rad: function(deg) {
 	  	return deg * (Math.PI/180)
-	}
+	},
+    
+    generateTestData: function(city, returnSet) {
+        var cities = ["New York", "Philadelphia", "Pittsburgh"];
+        var coords = {
+            "New York" : [
+                {latitude:40.737811, longitude:-73.988864},
+                {latitude:40.702738, longitude:-74.011084},
+                {latitude:40.748433, longitude:-73.985656},
+                {latitude:40.747208, longitude:-73.995237},
+                {latitude:40.741781, longitude:-74.004501},
+                {latitude:40.712204, longitude:-74.001676},
+            ],
+            "Philadelphia": [
+                {latitude:39.956005, longitude:-75.191633},
+                {latitude:39.916694, longitude:-75.140040},
+                {latitude:39.948368, longitude:-75.144098},
+                {latitude:39.947505, longitude:-75.167813},
+                {latitude:39.969445, longitude:-75.168629},
+                {latitude:39.907848, longitude:-75.162792},
+            ],
+            "Pittsburgh": [
+                {latitude:40.440625, longitude:-79.995886},
+                {latitude:40.439919, longitude:-80.001004},
+                {latitude:40.443120, longitude:-80.000403},
+                {latitude:40.442304, longitude:-80.006068},
+                {latitude:40.437078, longitude:-79.996712},
+                {latitude:40.443153, longitude:-79.996154}
+            ]
+        }
+        var curCity = "";
+        if (city === undefined) {
+            var index = Math.floor(Math.random() * (cities.length));
+            curCity = cities[index];
+        }
+        else {
+            curCity = city;
+        }
+        
+        var index = Math.floor(Math.random() * 6);
+        if (returnSet) return coords;
+        else return coords[curCity][index];
+    }
 
 }
 
