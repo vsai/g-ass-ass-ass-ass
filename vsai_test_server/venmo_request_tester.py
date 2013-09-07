@@ -11,6 +11,10 @@ app.config['PRESERVE_CONTEXT_ON_EXCEPTION'] = False
 def hello_world():
 	return "Hello World"
 
+@app.route('/y')
+def abc():
+	return render_template('redirectHTML.html')
+
 @app.route('/mkpay', methods=['POST'])
 def make_payment():
 	x = json.loads(request.data)
@@ -24,5 +28,5 @@ def fake_make_charge():
 	x['amount'] = -1 #charge
 	
 
-
-
+if __name__ == '__main__':
+	app.run(debug=True)

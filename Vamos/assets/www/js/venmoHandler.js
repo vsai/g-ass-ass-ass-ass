@@ -8,11 +8,9 @@ venmoHandler = {
         make it go to the authURL, receive the redirect, ignore it, but extract the token part
         assign it to the token
     */
-    $.get(authURL, function(data) {
-      console.log(data);
-      return $('body').append('Success got url');
-    });
-    this.token = 'yolo';
+    console.log(this.authURL);
+
+    // this.token = 'yolo';
     return console.log('Connected. Yeah boi!');
   },
   makePayment: function(contact, noteIn, amountIn) {
