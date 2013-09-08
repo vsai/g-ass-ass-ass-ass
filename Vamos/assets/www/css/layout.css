@@ -12,14 +12,18 @@ body {
 	margin: 0px;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     font-size: 15px;
+    background-image: url('../img/texture.jpg');
+    /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d0e4f7), color-stop(98%,#73b1e7)); 
+    background: -webkit-linear-gradient(top, #d0e4f7 0%,#73b1e7 98%); */
+}
 
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f4f0), color-stop(52%,#e5eecc), color-stop(100%,#dcecb5)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #f6f4f0 0%,#e5eecc 52%,#dcecb5 100%); /* Chrome10+,Safari5.1+ */
+body.backgroundImage {
+    background-image: url('../img/background.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 #pagesContainer {
-    /*background: rgb(25,25,112);*/
-    /*background: orange;*/
 }
 
 .page {
@@ -46,6 +50,32 @@ h4{
 
 h5{
     font-size: 1.1em;
+}
+
+input,label{
+    text-align: center;
+    font-size: 15px;
+    border-radius: 5px;
+    display: block;
+    margin: 5px auto;
+    padding: 5px; 
+}
+
+input {
+    margin-bottom: 15px;
+}
+
+#or {
+    margin: 40px auto;
+}
+
+#line {
+    border-top: 1px solid black;
+    margin: 0px 5px;
+    width: 80px;
+    position: relative;
+    bottom: 2px;
+    display: inline-block;
 }
 
 button {

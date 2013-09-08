@@ -32,6 +32,7 @@ GPSPage.prototype = {
 
 		this.latlons = [];
         this.setupGPS();
+        $('body,html').addClass('backgroundImage');
         //this.testGPS();
 
         $("#endTripBtn").on("click", function() {
@@ -50,13 +51,14 @@ GPSPage.prototype = {
 		$("#Middle").css("display", "none");
 		this.endGPS();
 		this.latlons = [];
+        $('body,html').removeClass('backgroundImage');
 	},
 
 	updateUI: function() {
 		$("#mpgDisplay").html(this.app.mpg);
 		$("#costPerGalDisplay").html(this.app.costPerGal);
 
-		var roundedMiles = Math.round(this.app.miles * 100)/100.0
+		var roundedMiles = Math.round(this.app.miles * 1000)/1000.0
 		$("#milesDisplay").html(roundedMiles);
 		var totalCost = this.app.miles / this.app.mpg * this.app.costPerGal;
 		if (this.app.passengers.length === 0) {
@@ -91,11 +93,12 @@ GPSPage.prototype = {
 	},
 
 	setupGPS: function() {
-		var options = {timeout:15000, enableHighAccuracy:true, frequency: 5000};
+		var options = {maximumAge:3000, timeout:15000, enableHighAccuracy:true, frequency: 5000};
 		this.app.miles = 0;
 		$("#milesDisplay").html(this.app.miles);
+        this.numToSkip = 3;
 		
-		watchID = navigator.geolocation.watchPosition(
+		this.watchID = navigator.geolocation.watchPosition(
 			this.onSuccess.bind(this),
 			this.onError.bind(this),
 			options
@@ -109,33 +112,44 @@ GPSPage.prototype = {
 		this.watchID = null;
 	},
 
-	onSuccess: function(position, ind) {
+	onSuccess: function(position) {
+	// /*Testing*/ onSuccess: function(position, ind) {
+        if (this.numToSkip > 0) {
+            this.numToSkip -= 1;
+            return;
+        }
 		var lat = position.coords.latitude;
 		var lon = position.coords.longitude;
+        console.log('[' + lat + ', ' + lon + ']   - prior size of latlons: ' + this.latlons.length);
 		if (this.latlons.length === 0) {
 			this.latlons.push([lat,lon]);
 			return;
 		}
-		//var prevLatLon = this.latlons[this.latlons.length - 1];
-        var prevLatLon = this.latlons[ind - 1];
+		var prevLatLon = this.latlons[this.latlons.length - 1];
+        // /*Testing*/var prevLatLon = this.latlons[ind - 1];
 		var prevLat = prevLatLon[0];
 		var prevLon = prevLatLon[1];
-		if (lat === prevLat && lon === prevLon) return;
+		if (lat === prevLat && lon === prevLon)
+            return;
 
         var increasedDistance = this.getDistanceFromLatLonInMiles(
 			prevLat,
 			prevLon,
 			lat,
 			lon);
+
+        // skip if distance is less than 50~ feet
+        if (increasedDistance < 0.01) {
+            return;
+        }
+        console.log('[' + prevLat + ', ' + prevLon + '] --> [' +
+            lat + ', ' + lon + '] results in: ' + increasedDistance + 'more miles');
+
 		this.app.miles += increasedDistance;
         this.latlons.push([lat,lon]);
         this.travelLog.increaseCityMileage(increasedDistance);
-        //var me = this;
-        //setTimeout(function() {me.travelLog.cityFromCoords({lat: lat, longi: lon})}, 1500*i);
         this.travelLog.cityFromCoords({lat: lat, longi: lon});
 		this.updateUI();
-
-		
 	},
 
 	onError: function(error) {
@@ -149,9 +163,9 @@ GPSPage.prototype = {
 		var dLat = this.deg2rad(lat2-lat1);  // deg2rad below
 		var dLon = this.deg2rad(lon2-lon1); 
 		var a = 
-			Math.sin(dLat/2) * Math.sin(dLat/2) +
+			Math.sin(dLat/2.0) * Math.sin(dLat/2.0) +
 			Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) * 
-			Math.sin(dLon/2) * Math.sin(dLon/2);
+			Math.sin(dLon/2.0) * Math.sin(dLon/2.0);
 
 		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
 		var d = R * c; // Distance in km
@@ -159,7 +173,7 @@ GPSPage.prototype = {
 	},
 
 	deg2rad: function(deg) {
-	  	return deg * (Math.PI/180)
+	  	return deg * (Math.PI/180.0)
 	},
     
     generateTestData: function(city, returnSet) {

@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Vamos</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
         <script type="text/javascript" charset="utf-8" src="../js/libs/jquery-2.0.3.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/libs/cordova.js"></script>
@@ -44,11 +44,11 @@
     		    <div class="page" id="Home">
                 <div id="appHeader">Vamos</div>
                 <div class="btnBlock">
-                    <div class="homeBtn" id="GPSLink">Use the GPS</div>
+                    <div class="homeBtn" id="GPSLink"></div>
                 </div>
                 <div class="btnBlock">
-                    <div class="homeBtn" id="GMapsLink">Use GMaps to route</div>
-                    <div class="homeBtn" id="OdometerLink">Put in Info from Odometer</div>
+                    <div class="homeBtn" id="GMapsLink"></div>
+                    <div class="homeBtn" id="OdometerLink"></div>
                 </div>
       	    </div>
         		<div class="page" id="Middle">
@@ -58,20 +58,23 @@
                         <div class="editLocContainer"><h3 class="editNav" id="edit1">Efficiency</h3></div>
                         <div class="editLocContainer"><h3 class="editNav" id="edit2">Friends</h3></div>
                     </div>
-    				        <ol id="editContent">
+			        <ol id="editContent">
                         <li id="editContent0">
                             <h1>Price</h1>
                             <label for="costPerGallon">Cost per Gallon</label>
-                            <input type="text" id="costPerGallon">
+                            <input type="number" id="costPerGallon">
                         </li>
                         <li id="editContent1">
                             <h1>Efficiency</h1>
-                            <label for="mpgInput">MPG</label><br>
-                            <input type="text" id="mpgInput"><br>
-                            <label for="makeInput">Make</label><br>
-                            <input type="text" id="makeInput"><br>
-                            <label for="modelInput">Model</label><br>
+                            <label for="makeInput">Make</label>
+                            <input type="text" id="makeInput">
+                            <label for="modelInput">Model</label>
                             <input type="text" id="modelInput">
+                            <div id="or">
+                                <span id="line"></span>or<span id="line"></span>
+                            </div>
+                            <label for="mpgInput">MPG</label>
+                            <input type="number" id="mpgInput">
                         </li>
                         <li id="editContent2">
                             <h1>Passengers</h1>
@@ -106,18 +109,19 @@
                     <input type="text" id="endDest"><br>
                 </div>
                 <div class="tabPage" id="odomMain">
-                    <label for="milesTravelled">Miles Travelled</label><br>
-                    <input type="text" id="milesTravelled"><br>
-                    <label for="startMileage">Starting Mileage</label><br>
-                    <input type="text" id="makeInput"><br>
-                    <label for="endMileage">End Mileage</label><br>
-                    <input type="text" id="endMileage"><br>
+                    <label for="milesTravelled">Miles Travelled</label>
+                    <input type="number" id="milesTravelled">
+                    <div id="or">
+                        <span id="line"></span>or<span id="line"></span>
+                    </div>
+                    <label for="startMileage">Starting Mileage</label>
+                    <input type="number" id="makeInput">
+                    <label for="endMileage">End Mileage</label>
+                    <input type="number" id="endMileage">
                 </div>
 
-          			<ul id="nav">
-    				
-                </ul>
-    		    </div>
+      			<ul id="nav"></ul>
+		    </div>
         </div>
     </body>
 </html>
