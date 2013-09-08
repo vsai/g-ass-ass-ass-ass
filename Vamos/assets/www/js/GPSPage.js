@@ -50,8 +50,8 @@ GPSPage.prototype = {
         });
 
 		this.latlons = [];
-        this.setupGPS();
-        //this.testGPS();
+        //this.setupGPS();
+        this.testGPS();
 
        /* $("#endTripBtn").on("click", function() {
         	if (this.app.passengers.length === 0) {

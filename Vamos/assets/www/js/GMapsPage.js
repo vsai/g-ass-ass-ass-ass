@@ -9,6 +9,7 @@ GMapsPage.prototype = {
 	// Event Handler for clicks
 	enter: function() {
         this.editState = new editTabPage("#GMapsMain");
+        var mapHandler = new gmapsHandler(this);
 
 		$("#Middle").css("display", "block");
 		//Handle tabs to show
@@ -27,6 +28,21 @@ GMapsPage.prototype = {
             if (newTabName === "Edit") {
                 me.editState.enter();
             }
+        });
+
+        $("#gmapsSubmitBtn").on("click", function() {
+            var origin = $("#address0").val();
+            var destination = $("#address1").val();
+            if (origin.length === 0 || destination.length === 0) {
+                alert("Add origin and destination");
+                return;
+            }
+            var distance = mapHandler.getDistance(origin, destination);
+            if (distance === null) {
+                alert("Unable to calculate distance");
+                return;
+            }
+            alert("Distance: "+ distance);
         })
 	},
 

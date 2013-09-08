@@ -35,22 +35,27 @@ body.backgroundImage {
 }
 
 h1 {
+    font-family: RobotoLight;
     font-size: 3.2em;
 }
 
 h2 {
+    font-family: RobotoLight;
     font-size: 2.7em;
 }
 
 h3{
+    font-family: RobotoLight;
     font-size: 1.6em;
 }
 
 h4{
+    font-family: RobotoLight;
     font-size: 1.4em;
 }
 
 h5{
+    font-family: RobotoLight;
     font-size: 1.1em;
 }
 
@@ -59,16 +64,16 @@ input,label{
     font-size: 15px;
     border-radius: 5px;
     display: block;
-    margin: 5px auto;
-    padding: 5px; 
+    margin: 4px auto;
 }
 
 input {
-    margin-bottom: 15px;
+    padding: 5px; 
+    margin-bottom: 8px;
 }
 
 #or {
-    margin: 40px auto;
+    margin: 20px auto;
 }
 
 #line {
@@ -99,5 +104,28 @@ button {
 .endConfirmation {
     height: 0px;
     overflow: hidden;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url('../fonts/Roboto-Regular-webfont.ttf');/* relative path from the css file */
+}
+
+@font-face {
+  font-family: "RobotoMedium";
+  src: url('../fonts/Roboto-Medium-webfont.ttf');/* relative path from the css file */
+}
+
+@font-face {
+  font-family: "RobotoLight";
+  src: url('../fonts/Roboto-Light-webfont.ttf');/* relative path from the css file */
+}
+
+.logo {
+    text-align: left;
+    font-size: 30px;
+    float: left;
+    color: #175407;
+    text-shadow: 0 -1px 0 #175407;
 }
 

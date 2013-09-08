@@ -28,7 +28,7 @@ App.prototype = {
 	},
 
 	reset: function() {
-		this.mpg = null;
+		this.mpg = 12;
 		this.costPerGal = null;
 		this.passengers = {};
 		this.perPersonCost = null;

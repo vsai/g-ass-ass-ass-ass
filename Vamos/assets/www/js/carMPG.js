@@ -31,22 +31,21 @@ function getMPGfromModel(model_id) {
     $.getJSON("http://www.carqueryapi.com/api/0.3/?callback=?&cmd=getModel" + "callback=?", 
         {cmd:"getModel", model:model_id}, function(result) {
             if (result !== undefined) {
-                console.log("HERE!");
                 var hwy = result[0]["model_mpg_hwy"];
                 var mixed = result[0]["model_mpg_mixed"];
                 var city = result[0]["model_mpg_city"];
-                var html = $(target).val();
+                var html = $(target).html();
                 if (html === "") {
                     if (mixed !== null) {
-                        $(target).val(mixed);
+                        $(target).html(mixed + " mpg");
                         return 1;
                     }
                     if (hwy !== null) {
-                        $(target).val(hwy);
+                        $(target).html(hwy + " mpg");
                         return 1;
                     }
                     if (city !== null) {
-                        $(target).val(city);
+                        $(target).html(city + " mpg");
                         return 1;
                     }
                 }
