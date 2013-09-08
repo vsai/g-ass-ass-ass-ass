@@ -1,0 +1,19 @@
+#friendsOrFoes tbody input {
+    text-align: left;
+}
+
+#friendResults{
+    height: 150px;
+    width: 200px;
+    border: 1px solid black;
+    display: none;
+}
+
+#friendResults tbody td, #friendResults tbody tr {
+    width: 100%;
+}
+
+#friendResults tbody tr {
+    box-sizing: border-box;
+    height: 33%;
+}

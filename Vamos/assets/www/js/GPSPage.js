@@ -5,16 +5,23 @@ var GPSPage = function(app){
 				"<li class='tab'><a href='#GPSMain'>GPS Main</a></li>" + 
 				"<li class='tab'><a href='#travelLog'>Travel Log</a></li>";
 	this.watchID = null;
-    $("endTripBtn").on("click", function() {
-        if ($("#endConfirmation").hasClass("expanded")) {
-            $("#endConfirmation").animate({ height: 0 }, 600);
-            $("#endConfirmation").removeClass("expanded");
+    $("#endTripBtn").on("click", function() {
+        if ($(".endConfirmation").hasClass("expanded")) {
+            $(".endConfirmation").animate({ "height": "0px" }, 300);
+            $(".endConfirmation").removeClass("expanded");
         }
         else {
-            $("#endConfirmation").animate({ height: "100%" }, 600);
-            $("#endConfirmation").addClass("expanded");
+            $(".endConfirmation").animate({ "height": "100px" }, 600);
+            $(".endConfirmation").addClass("expanded");
         }
     });
+    $(".no").on("click", function() {
+        $(".endConfirmation").animate({ "height": "0px" }, 300);
+        $(".endConfirmation").removeClass("expanded");
+    });
+    $(".yes").on("click", function() {
+        this.app.switchPage("Payment");
+    }.bind(this));
 }
 
 GPSPage.prototype = {
@@ -46,7 +53,7 @@ GPSPage.prototype = {
         this.setupGPS();
         //this.testGPS();
 
-        $("#endTripBtn").on("click", function() {
+       /* $("#endTripBtn").on("click", function() {
         	if (this.app.passengers.length === 0) {
         		// Alert that passengers isn't filled out
         	}
@@ -55,7 +62,7 @@ GPSPage.prototype = {
         	
         	this.endGPS();
         	$("#endTripBtn").html('Stopped');
-        }.bind(this));
+        }.bind(this));*/
         
         $("#gasPointButton").on("click", function() {
             this.travelLog.addGasPoint();
@@ -145,7 +152,7 @@ GPSPage.prototype = {
         }
 		var lat = position.coords.latitude;
 		var lon = position.coords.longitude;
-        console.log('[' + lat + ', ' + lon + ']   - prior size of latlons: ' + this.latlons.length);
+        //console.log('[' + lat + ', ' + lon + ']   - prior size of latlons: ' + this.latlons.length);
 		if (this.latlons.length === 0) {
 			this.latlons.push([lat,lon]);
 			return;
@@ -167,8 +174,8 @@ GPSPage.prototype = {
         if (increasedDistance < 0.01) {
             return;
         }
-        console.log('[' + prevLat + ', ' + prevLon + '] --> [' +
-            lat + ', ' + lon + '] results in: ' + increasedDistance + 'more miles');
+        // console.log('[' + prevLat + ', ' + prevLon + '] --> [' +
+            // lat + ', ' + lon + '] results in: ' + increasedDistance + 'more miles');
 
 		this.app.miles += increasedDistance;
         this.latlons.push([lat,lon]);

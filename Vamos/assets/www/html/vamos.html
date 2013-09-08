@@ -5,13 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
         <script type="text/javascript" charset="utf-8" src="../js/libs/jquery-2.0.3.js"></script>
-        <script type="text/javascript" charset="utf-8" src="../js/libs/cordova.js"></script>
+        <!--<script type="text/javascript" charset="utf-8" src="../js/libs/cordova.js"></script>-->
         <script type="text/javascript" charset="utf-8" src="../js/jquery.easytabs.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/API/api.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/libs/fullscreenBackground.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/App.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/HomePage.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/GPSPage.js"></script>
+         <script type="text/javascript" charset="utf-8" src="../js/PaymentPage.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/GMapsPage.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/OdometerPage.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/tabPages/edit.js"></script>
@@ -36,6 +37,7 @@
         <link rel="stylesheet" type="text/css" href="../css/layout.css">
         <link rel="stylesheet" type="text/css" href="../css/home.css">
         <link rel="stylesheet" type="text/css" href="../css/middle/navigation.css">
+        <link rel="stylesheet" type="text/css" href="../css/middle/passengers.css">
         <link rel="stylesheet" type="text/css" href="../css/middle/GPSMain.css">
         <link rel="stylesheet" type="text/css" href="../css/middle/editTabPage.css">
         <link rel="stylesheet" type="text/css" href="../css/middle/travelLogTabPage.css">
@@ -43,7 +45,7 @@
 
     <body>
         <div id="pagesContainer">
-    		    <div class="page" id="Home">
+            <div class="page" id="Home">
                 <div id="appHeader">Vamos</div>
                 <div class="btnBlock">
                     <div class="homeBtn" id="GPSLink"></div>
@@ -53,7 +55,7 @@
                     <div class="homeBtn" id="OdometerLink"></div>
                 </div>
       	    </div>
-        		<div class="page" id="Middle">
+            <div class="page" id="Middle">
                 <div class="tabPage" id="edit">
                     <div id="editLocation">
                         <div class="editLocContainer"><h3 class="editNav" id="edit0">Price</h3></div>
@@ -82,10 +84,24 @@
                             </div>
 
                             <label for="mpgInput">MPG</label><br>
-                            <input type="number" id="mpgInput"
+                            <input type="number" id="mpgInput">
                         </li>
                         <li id="editContent2">
                             <h1>Passengers</h1>
+                            <div id="friendsOrFoes">
+                                <input class="addPassenger bottomMost" placeholder="Add a passenger" type="text">
+                                <table id="friendResults">
+                                    <tr>
+                                        <td>Jon Burman</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Carter Salismon</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jenny Jennerson</td>
+                                    </tr>
+                                </table>
+                            </div>
                         </li>
                         <div id="editBtns">
                             <button id="continueEditBtn">Continue</button>
@@ -108,8 +124,8 @@
                     <div class="endConfirmation">
                         <h4>Are you sure you want to end your trip with the current settings?</h4>
                         <div id="endButtonChoices">
-                            <button>Yes</button>
-                            <button>No</button>
+                            <button class="yes">Yes</button>
+                            <button class="no">No</button>
                         </div>
                     </div>
                 </div>
@@ -144,9 +160,13 @@
                     <label for="endMileage">End Mileage</label>
                     <input type="number" id="endMileage">
                 </div>
+                
 
       			<ul id="nav"></ul>
 		    </div>
+            <div class="page" id="Payment">
+                <h1>Pay some dough</h1>
+            </div>
         </div>
     </body>
 </html>

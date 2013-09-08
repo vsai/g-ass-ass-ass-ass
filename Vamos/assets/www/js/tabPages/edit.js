@@ -24,6 +24,34 @@ var editTabPage = function(nextTabId, page) {
         var model = $("#modelInput").val();
         getMPG(year, make, model);
     });
+    $("#costPerGallon").bind("keyup", function() {
+        $(".firstGasPoint").data("price", $("#costPerGallon").val());
+    });
+    $(".bottomMost").bind("keyup", function() {
+        if ($(".bottomMost").val() == "") {
+            $("#friendResults").css("display", "none");
+        }
+        else {
+            $("#friendResults").css("display", "block");
+        }
+    });
+    $("#friendResults tr").on("click", function() {
+        if ($(this).html() !== "") {
+            var newField = document.createElement("input");
+            $(newField).attr("type", "text");
+            $(newField).attr("value", $(this).html());
+            $(newField).attr("disabled", "disabled");
+            $(".bottomMost").before(newField);
+            $(newField).addClass("passengerName");
+            $(".bottomMost").val("");
+            $(".bottomMost").attr("placeholder", "Add a passenger");
+            $("#friendResults").css("display", "none");
+            $(".passengerName").on("click", function() {
+                console.log("HUR");
+                $(this).css("display", "none");
+            });
+        }
+    });
 }
 
 editTabPage.prototype = {

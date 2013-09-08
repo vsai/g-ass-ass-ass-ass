@@ -4,8 +4,8 @@ var App = function(){
 		"Home": new HomePage(this),
 		"GPS": new GPSPage(this),
 		"GMaps": new GMapsPage(this),
-		"Odometer": new OdometerPage(this)
-		//"Payment": new PaymentPage(this)
+		"Odometer": new OdometerPage(this),
+		"Payment": new PaymentPage(this)
 	};
     this.API = {};
     this.API.venmoHandler = new venmoHandler();
