@@ -59,16 +59,16 @@ input,label{
     font-size: 15px;
     border-radius: 5px;
     display: block;
-    margin: 5px auto;
-    padding: 5px; 
+    margin: 4px auto;
 }
 
 input {
-    margin-bottom: 15px;
+    padding: 5px; 
+    margin-bottom: 8px;
 }
 
 #or {
-    margin: 40px auto;
+    margin: 20px auto;
 }
 
 #line {

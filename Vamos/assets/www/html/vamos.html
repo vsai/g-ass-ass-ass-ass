@@ -16,7 +16,7 @@
         <script type="text/javascript" charset="utf-8" src="../js/OdometerPage.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/tabPages/edit.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/tabPages/travelLogTabPage.js"></script>
-        <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+        <script src="http://maps.google.com/maps/api/js?key=AIzaSyBQd7_36ekIdzdJxjOgRVKWFwGo7_ZCC40&sensor=false" type="text/javascript"></script>
         <script type="text/javascript" charset="utf-8" src="../js/carMPG.js"></script>
         <script>
             window.deviceReady = false;
@@ -122,21 +122,24 @@
                     </div>
                 </div>
                 <div class="tabPage" id="GMapsMain">
-                    <label for="startDest">Start Location</label><br>
-                    <input type="text" id="mpgInput"><br>
-                    <label for="endDest">End Location</label><br>
-                    <input type="text" id="endDest"><br>
+                    <h3>Route your drive</h3>
+                    <input type="text" id="address0" placeholder="Start Address">
+                    <input type="text" id="address1" placeholder="Next Address">
+                    <div class="addDestinationBtn">+</div>
+                    <button id="gmapsSubmitBtn">Submit</button>
+
                 </div>
                 <div class="tabPage" id="odomMain">
-                    <label for="milesTravelled">Miles Travelled</label>
-                    <input type="number" id="milesTravelled">
+                    <label for="startMileage">Starting Mileage</label>
+                    <input type="number" id="startMileageInput">
+                    <label for="endMileage">End Mileage</label>
+                    <input type="number" id="endMileageInput">
                     <div id="or">
                         <span id="line"></span>or<span id="line"></span>
                     </div>
-                    <label for="startMileage">Starting Mileage</label>
-                    <input type="number" id="makeInput">
-                    <label for="endMileage">End Mileage</label>
-                    <input type="number" id="endMileage">
+                    <label for="milesTraveled">Miles Traveled</label>
+                    <input type="number" id="odometerMilesTraveled">
+                    <button id="odometerCalculateBtn">Submit</button>
                 </div>
 
       			<ul id="nav"></ul>
