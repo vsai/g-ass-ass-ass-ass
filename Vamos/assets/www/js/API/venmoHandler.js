@@ -109,7 +109,7 @@ var venmoHandler = function(){
         }
     }.bind(this);
 
-    this.getMyFriends = function(callback, user_id) {
+    this.getMyFriendsHelper = function(callback, user_id) {
         var callHerBackYo = function() {
             var getFriendsURL = 'https://api.venmo.com/users/' + user_id +'/friends?';
             $.get(getFriendsURL, {access_token: this.token}, callback);
@@ -119,5 +119,19 @@ var venmoHandler = function(){
         } else {
             callHerBackYo();
         }
-    }
+    }.bind(this);
+
+    this.getMyFriends = function(callback) {
+        var callMEBACK = function() {
+            this.getMe(function(dataUser) {
+                this.getMyFriendsHelper(function(dataFriends){
+                        callback(dataFriends);}, dataUser['data']['id']);
+            });
+        }.bind(this);
+        if (!this.token) {
+            this.venmoConnect(callMEBACK);
+        } else {
+            callMEBACK();
+        }
+    }.bind(this);
 };
