@@ -15,17 +15,34 @@
         function onDeviceReady() {
 		    alert("On device ready huh");      
 
-            //vhandler.venmoConnect();
+            vhandler.venmoConnect();
             //vhandler.getMe(function(data){alert(data['data']['display_name']);});
             //vhandler.ven();
+	        /*
             vhandler.makePayment('4129803144',
                                  'you are so awesome',
                                  '1',
                                  function(data){
                                     alert(data['message']);
                                  });
+            vhandler.getMyFriends(function(data){
+                alert("number of friends: " + data['data'].length);
+                for (var i=0; i<5; i++) {
+                    alert(data['data'][i]['display_name']);
+                }
+            });
+
+	        */
+	        /*
+            vhandler.getMe(function(data) {
+	            vhandler.getMyFriends(function(data2){
+                    alert(data2['data'][0]['display_name']);
+	             }, data['data']['id']);
+	        });
+            */
+            console.log('workkkkk');
       	    document.getElementById('geolocation').innerHTML = 'Ready to watch!';
-        } 
+         } 
     </script>
   </head>
   <body>

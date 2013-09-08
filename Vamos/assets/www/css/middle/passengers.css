@@ -1,0 +1,76 @@
+#friendsOrFoes tbody input {
+    text-align: left;
+}
+
+#friendResults{
+    height: 150px;
+    width: 200px;
+    border: 1px solid black;
+    display: none;
+}
+
+#friendResults tbody td, #friendResults tbody tr {
+    width: 100%;
+}
+
+#friendResults tbody tr {
+    box-sizing: border-box;
+    height: 33%;
+}
+
+#editLocation h3 {
+    font-size: 19px;
+    display: inline-block;
+}
+
+#editLocation .numberCircle {
+    background: black;
+    border-radius: 0.8em;
+    -moz-border-radius: 0.8em;
+    -webkit-border-radius: 0.8em;
+    color: #ffffff;
+    display: inline-block;
+    font-weight: bold;
+    line-height: 1.6em;
+    margin-right: 5px;
+    text-align: center;
+    width: 1.6em; 
+}
+
+.editLocContainer {
+    text-align: left;
+    margin-left: 10px;
+    position: relative;
+}
+
+.leftBorder {
+    width: 5px;
+    height: 100px;
+    top:87px;
+    position: absolute;
+    margin-left: 55px;
+    border-left: 1px dashed black;
+}
+
+.leftBorder2 {
+    width: 5px;
+    height: 100px;
+    top:230px;
+    position: absolute;
+    margin-left: 55px;
+    border-left: 1px dashed black;
+}
+
+#editContent input#yearInput {
+    width: 25%;
+    float:left;
+    margin-left:47px;
+}
+
+#yearLabel {
+    margin-left: -34px;
+}
+
+#edit button#makeButton {
+    margin-top: -3px;
+}

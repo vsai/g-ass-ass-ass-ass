@@ -24,6 +24,42 @@ var editTabPage = function(nextTabId, page) {
         var model = $("#modelInput").val();
         getMPG(year, make, model);
     });
+    $("#costPerGallon").bind("keyup", function() {
+        $(".firstGasPoint").data("price", $("#costPerGallon").val());
+    });
+    $(".bottomMost").bind("keyup", function(event) {
+        if ($(".bottomMost").val() == "") {
+            $('#friendResults').html('');
+            $("#friendResults").css("display", "none");
+        }
+        else {
+            var searchFriendsQuery = $(".bottomMost").val();
+            var x = [].concat(document.API.venmoHandler.myFriends);
+            $.filter(function(index){
+                return (x[index]['display_name'].indexOf(searchFriendsQuery) !== -1);
+            });
+            var friendsHTML = '';
+            for (var i=0; i<x.length; i++) {
+                friendsHTML += '<tr><td>'+x[i]['display_name']+'</td></tr>'
+                if (i>=4) break; //don't populate more than 5 elements in the list
+            }
+
+            $("#friendResults").css("display", "block");
+        }
+    });
+    $("#friendResults tr").on("click", function() {
+        if ($(this).html() !== "") {
+            var newField = document.createElement("input");
+            $(newField).attr("type", "text");
+            $(newField).attr("value", $(this).html());
+            $(newField).attr("disabled", "disabled");
+            $(".bottomMost").before(newField);
+            $(newField).addClass("passengerName");
+            $(".bottomMost").val("");
+            $(".bottomMost").attr("placeholder", "Add a passenger");
+            $("#friendResults").css("display", "none");
+        }
+    });
 }
 
 editTabPage.prototype = {

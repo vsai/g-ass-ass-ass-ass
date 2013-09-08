@@ -5,3 +5,25 @@
 #actualLogs > li {
     border: 1px solid black;
 }
+
+#addGasPoint {
+    width: 50%;
+    position: absolute;
+    bottom: 60px;
+}
+
+#addGasPoint button {
+    width: 70px;
+    height: 32px;
+    display: inline-block;
+}
+
+#addGasPoint input {
+    width: 80px;
+    display: inline-block;
+    margin-bottom: 0px;
+}
+
+#addGasPoint span {
+    display: inline-block;
+}
