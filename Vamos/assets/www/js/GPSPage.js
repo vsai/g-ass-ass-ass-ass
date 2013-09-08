@@ -5,6 +5,16 @@ var GPSPage = function(app){
 				"<li class='tab'><a href='#GPSMain'>GPS Main</a></li>" + 
 				"<li class='tab'><a href='#travelLog'>Travel Log</a></li>";
 	this.watchID = null;
+    $("endTripBtn").on("click", function() {
+        if ($("#endConfirmation").hasClass("expanded")) {
+            $("#endConfirmation").animate({ height: 0 }, 600);
+            $("#endConfirmation").removeClass("expanded");
+        }
+        else {
+            $("#endConfirmation").animate({ height: "100%" }, 600);
+            $("#endConfirmation").addClass("expanded");
+        }
+    });
 }
 
 GPSPage.prototype = {
