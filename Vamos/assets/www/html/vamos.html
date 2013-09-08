@@ -12,7 +12,6 @@
         <script type="text/javascript" charset="utf-8" src="../js/App.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/HomePage.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/GPSPage.js"></script>
-         <script type="text/javascript" charset="utf-8" src="../js/PaymentPage.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/GMapsPage.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/OdometerPage.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/PaymentPage.js"></script>
@@ -62,7 +61,7 @@
                         <div class="leftBorder"></div>
                         <div class="leftBorder2"></div>
                         <div class="editLocContainer"><span class="numberCircle">1</span><h3 class="editNav" id="edit0">Price</h3></div>
-                        <div class="editLocContainer"><span class="numberCircle">2</span><h3 class="editNav" id="edit1">Efficiency</h3></div>
+                        <div class="editLocContainer"><span class="numberCircle">2</span><h3 class="editNav" id="edit1">MPG</h3></div>
                         <div class="editLocContainer"><span class="numberCircle">3</span><h3 class="editNav" id="edit2">Friends</h3></div>
                     </div>
 			        <ol id="editContent">
@@ -72,7 +71,14 @@
                             <input type="number" id="costPerGallon">
                         </li>
                         <li id="editContent1">
-                            <h1>Efficiency</h1>
+                            <h1>MPG</h1>
+                            <label for="mpgManualInput">MPG</label><br>
+                            <input type="number" id="mpgManualInput">
+                            
+                            <div id="or">
+                                <span id="line"></span>or<span id="line"></span>
+                            </div>
+
                             <label for="makeInput" class="carLab">Make</label>
                             <input class = "carPrediction" type="text" id="makeInput">
                             <label for="modelInput" class="carLab">Model</label>
@@ -82,13 +88,9 @@
                             <input class = "carPrediction" type="number" id="yearInput">
                             <button id="makeButton">Search</button>
 
-                            <!--<div id="or">
-                                <span id="line"></span>or<span id="line"></span>
-                            </div>
 
-                            <label for="mpgInput">MPG</label><br>
-                            <input type="number" id="mpgInput">-->
                             <h3 id="mpgInput"></h3>
+
                         </li>
                         <li id="editContent2">
                             <h1>Passengers</h1>
@@ -177,6 +179,9 @@
 		    </div>
             <div class="page" id="Payment">
                 <h1>Pay some dough</h1>
+                <div>Miles: $<h3 id="paymentMiles"></h3></div>
+                <div>Per person: $<h3 id="paymentPerPerson"></h3></div>
+
             </div>
         </div>
     </body>

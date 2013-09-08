@@ -5,12 +5,16 @@ var PaymentPage = function(app){
 PaymentPage.prototype = {
 	enter: function() {
         $("#Payment").css("display", "block");
-        var total = this.calculateCosts();
-        var totalMiles = $("#milesDisplay").html();
-        $("#paymentMiles").html(Math.round(100*parseInt(totalMiles))/100);
-        $("#paymentCost").html(Math.round(100*total)/100);
-        $("#paymentPerPerson").html(Math.round((total/4)*100)/100);
-        //ver perPerson = total / (this.app.passengers.length + 1);
+        //var total = this.calculateCosts();
+        //var totalMiles = $("#milesDisplay").html();
+        $("#paymentMiles").html(Math.round(100*this.app.miles)/100);
+        //$("#paymentCost").html(Math.round(100*total)/100);
+        //var perPerson = total / (this.app.passengers.length + 1);
+        //this.perPersonCost = Math.round(perPerson*100)/100;
+
+        this.perPersonCost =  this.app.perPersonCost;
+        $("#paymentPerPerson").html(this.perPersonCost);
+        this.makePayments();
     },
     exit: function() {},
     calculateCosts: function() {
@@ -36,5 +40,13 @@ PaymentPage.prototype = {
         else {
             return parseInt(str);
         }
-    }
+    },
+    makePayments: function() {
+        passenger_ids = this.app.passengers;
+        for (var i = 0; i < passenger_ids.length; i++) {
+            var id = passenger_ids[i];
+            var desc = 'We carpooled together! Vamos!';
+            document.API.venmoHandler.makePayment(id, desc, this.perPersonCost);
+        }
+    },
 }

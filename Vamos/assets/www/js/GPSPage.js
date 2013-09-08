@@ -6,6 +6,7 @@ var GPSPage = function(app){
 				"<li class='tab'><a href='#travelLog'>Travel Log</a></li>";
 	this.watchID = null;
     $("#endTripBtn").on("click", function() {
+        this.updateUI();
         if ($(".endConfirmation").hasClass("expanded")) {
             $(".endConfirmation").animate({ "height": "0px" }, 300);
             $(".endConfirmation").removeClass("expanded");
@@ -14,7 +15,7 @@ var GPSPage = function(app){
             $(".endConfirmation").animate({ "height": "100px" }, 600);
             $(".endConfirmation").addClass("expanded");
         }
-    });
+    }.bind(this));
     $(".no").on("click", function() {
         $(".endConfirmation").animate({ "height": "0px" }, 300);
         $(".endConfirmation").removeClass("expanded");
@@ -50,8 +51,8 @@ GPSPage.prototype = {
         });
 
 		this.latlons = [];
-        //this.setupGPS();
-        this.testGPS();
+        this.setupGPS();
+        //this.testGPS();
 
        /* $("#endTripBtn").on("click", function() {
         	if (this.app.passengers.length === 0) {
@@ -93,12 +94,17 @@ GPSPage.prototype = {
 		var roundedMiles = Math.round(this.app.miles * 1000)/1000.0
 		$("#milesDisplay").html(roundedMiles);
 		var totalCost = this.app.miles / this.app.mpg * this.app.costPerGal;
+        $("#totalCostDisplay").html(Math.round(totalCost*100)/100);
 		if (this.app.passengers.length === 0) {
 			$("#perPersonCostContainer").css("display", "none");
 		} else {
-			var costPerPerson = this.app.passengers.length * 1.0;
-			$("#perPersonCostContainer").html(totalCost / costPerPerson);
-		}
+			var numPassengers = this.app.passengers.length * 1.0 + 1;
+            $("#perPersonCostContainer").css("display", "block");
+			$("#perPersonCostContainer").html(totalCost / numPassengers);
+            this.app.perPersonCost = (totalCost/numPassengers);
+	    }
+        //alert('totalCost: ' + totalCost);
+        //alert('numpassengers; ' + this.app.passengers.length);
 	},
 
 	testGPS: function() {

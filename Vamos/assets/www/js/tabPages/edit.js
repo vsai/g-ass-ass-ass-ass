@@ -23,11 +23,15 @@ var editTabPage = function(nextTabId, page) {
         var make = $("#makeInput").val();
         var model = $("#modelInput").val();
         getMPG(year, make, model);
+        var strmpg = $("#mpgInput").html();
+        if (strmpg.length > 0) {
+            $("#mpgManualInput").html(strmpg.substring(0, strmpg.length - 3));
+        }
     });
     $("#costPerGallon").bind("keyup", function() {
         $(".firstGasPoint").data("price", $("#costPerGallon").val());
     });
-    
+
     $(".bottomMost").bind("keyup", function(event) {
 	    //alert($('.bottomMost').val());
         if ($(".bottomMost").val() == "") {
@@ -44,8 +48,8 @@ var editTabPage = function(nextTabId, page) {
             var friendsHTML = '';
             //alert('filtered list length: ' + x.length);
             for (var i=0; i<x.length; i++) {
-                //alert(x[i]['display_name']);
-                this.page.app.passengers.push(x[i]['display_name']);
+                //alert(x[i]['id']);
+                this.page.app.passengers[this.page.app.passengers.length] = (x[i]['id']);
                 friendsHTML += '<div class="friendName">'+x[i]['display_name']+'</div>';
                 if (i>=4) break; //don't populate more than 5 elements in the list
             }
@@ -65,7 +69,7 @@ var editTabPage = function(nextTabId, page) {
                 }
             });
         }
-    });
+    }.bind(this));
 }
 
 editTabPage.prototype = {
@@ -114,11 +118,8 @@ editTabPage.prototype = {
     },
 
     getMpgInfo: function() {
-        if($("#mpgInput").val().length > 0) {
-            return $("#mpgInput").val();
-        }
-        if ($("#makeInput").val().length > 0 && $("#modelInput").val().length > 0) {
-            // Call API to find out mpg and return that
+        if($("#mpgManualInput").val().length > 0) {
+            return $("#mpgManualInput").val();
         }
         return 1.0;    //return avg value
     },

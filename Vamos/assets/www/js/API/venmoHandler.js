@@ -132,7 +132,7 @@ var venmoHandler = function(){
             var nextURL = data['pagination']['next'];
 
             if (nextURL === undefined) {
-                alert("Done getting friends");
+//                alert("Done getting friends");
                 if(callback) {
                     callback(this.myFriends);
                 }
