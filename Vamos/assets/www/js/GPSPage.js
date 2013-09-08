@@ -9,6 +9,7 @@ var GPSPage = function(app){
 
 GPSPage.prototype = {
 	enter: function() {
+        getMPG(2012, "hyundai", "elantra");
         this.editState = new editTabPage("#GPSMain", this);
         this.travelLog = new travelLogTabPage(this);
         this.editState.enter();
