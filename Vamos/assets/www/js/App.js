@@ -9,6 +9,8 @@ var App = function(){
 	};
     document.API = {};
     document.API.venmoHandler = new venmoHandler();
+    document.API.myGasFeedHandler = new myGasFeedHandler();
+    document.API.carQueryHandler = new carQueryHandler();
 	this.reset();
 	this.currPageStr = "Home";
 	this.currPage = this.availablePages[this.currPageStr];

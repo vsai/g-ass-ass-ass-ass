@@ -27,23 +27,28 @@ var editTabPage = function(nextTabId, page) {
     $("#costPerGallon").bind("keyup", function() {
         $(".firstGasPoint").data("price", $("#costPerGallon").val());
     });
+    
     $(".bottomMost").bind("keyup", function(event) {
+	    //alert($('.bottomMost').val());
         if ($(".bottomMost").val() == "") {
             $('#friendResults').html('');
             $("#friendResults").css("display", "none");
         }
         else {
-            var searchFriendsQuery = $(".bottomMost").val();
+	        //alert($('.bottomMost').val());
+            var searchFriendsQuery = $(".bottomMost").val().toLowerCase();
             var x = [].concat(document.API.venmoHandler.myFriends);
-            $.filter(function(index){
-                return (x[index]['display_name'].indexOf(searchFriendsQuery) !== -1);
+            x = x.filter(function(elem){
+                return (elem['display_name'].toLowerCase().indexOf(searchFriendsQuery) !== -1);
             });
             var friendsHTML = '';
+            //alert('filtered list length: ' + x.length);
             for (var i=0; i<x.length; i++) {
-                friendsHTML += '<tr><td>'+x[i]['display_name']+'</td></tr>'
+                //alert(x[i]['display_name']);
+                friendsHTML += '<tr><td>'+x[i]['display_name']+'</td></tr>';
                 if (i>=4) break; //don't populate more than 5 elements in the list
             }
-
+            $("#friendResults").html(friendsHTML);
             $("#friendResults").css("display", "block");
         }
     });

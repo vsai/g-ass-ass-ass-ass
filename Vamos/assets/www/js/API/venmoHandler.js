@@ -28,7 +28,7 @@ var venmoHandler = function(){
                 this.cbs.removeAllEventListeners();
                 this.ref = null;
                 //alert('save url, close the window: ' + event.url);
-                alert(this.token);
+                //alert(this.token);
                 if (this.myFriends.length == 0) {
                     this.getMyFriends(this.cbs.callMeMaybe);
                 } else {
@@ -130,7 +130,7 @@ var venmoHandler = function(){
             var nextURL = data['pagination']['next'];
 
             if (nextURL === undefined) {
-                //alert("Done getting friends");
+                alert("Done getting friends");
                 callback(this.myFriends);
             } else {
                 var url = nextURL + '&access_token='+this.token;

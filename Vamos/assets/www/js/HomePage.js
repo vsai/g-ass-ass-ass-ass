@@ -3,11 +3,12 @@ var HomePage = function(app){
 	this.string = "Home";
     var me = this;
 	$('.homeBtn').on('click', function(e) {
-        //if (window.deviceReady) {
+        if (window.deviceReady) {
             var btnId = $(e.target).closest('.homeBtn').attr("id");
-            setTimeout(function() {me.app.switchPage(btnId.replace(/Link$/, ""))}, 1000);
-            // document.API.venmoHandler.venmoConnect();
-        //}
+            //setTimeout(function() {me.app.switchPage(btnId.replace(/Link$/, ""))}, 50);
+            me.app.switchPage(btnId.replace(/Link$/, ""));
+            document.API.venmoHandler.venmoConnect();
+        }
 	}.bind(this));
 }
 
