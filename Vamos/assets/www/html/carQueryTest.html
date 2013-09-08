@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+            <title>CarQueryTest</title>
+    
+    <script type="text/javascript" charset="utf-8" src="../js/libs/jquery-2.0.3.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../js/API/api.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        var carHandler = new carQueryHandler();
+        carHandler.getCarFactsSimplified(function(data){console.log(data)},
+                                         //'toyota','Camry','2012');
+                                         'allard','J2R','-1');
+    </script>
+  </head>
+  <body>
+    <p id="geolocation">Device not ready yet</p>
+  </body>
+</html>
