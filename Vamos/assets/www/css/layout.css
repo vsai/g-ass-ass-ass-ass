@@ -18,12 +18,14 @@ body {
 }
 
 body.backgroundImage {
-    background-image: url('../img/background.jpg');
+    background: url("../img/road1.jpg");
     background-size: cover;
     background-position: center;
 }
 
 #pagesContainer {
+    /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f4f0), color-stop(52%,#e5eecc), color-stop(100%,#dcecb5)); /* Chrome,Safari4+ */
+    /*background: -webkit-linear-gradient(top, #f6f4f0 0%,#e5eecc 52%,#dcecb5 100%); /* Chrome10+,Safari5.1+ */
 }
 
 .page {

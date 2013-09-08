@@ -3,6 +3,8 @@ var travelLogTabPage = function(page){
     this.mostRecentCity = "";
     this.mostRecentState = "";
     this.distanceTravelledInCity = 0;
+    this.currentGasPointDist = 0;
+    this.showAll = true;
 }
 
 travelLogTabPage.prototype = {
@@ -29,8 +31,7 @@ travelLogTabPage.prototype = {
                     else {
                         if(city !== this.mostRecentCity || state !== this.mostRecentState) {
                             //PUSH THE OLD CITY INFO
-                            // console.log(this.mostRecentCity + ", " + this.mostRecentState);
-                            // console.log(this.distanceTravelledInCity);
+                            this.addTravelLog();
                             this.distanceTravelledInCity = 0;
                             this.mostRecentCity = city;
                             this.mostRecentState = state;
@@ -47,5 +48,27 @@ travelLogTabPage.prototype = {
     
     increaseCityMileage: function(incr) {
         this.distanceTravelledInCity += incr;
+        this.currentGasPointDist += incr;
+        $(".ongoingGasPoint .dist").html(this.currentGasPointDist);
+    },
+    
+    addTravelLog: function() {
+        var li = document.createElement("li");
+        $(li).addClass("log justTravel");
+        $(li).html("<h4>" + this.mostRecentCity + ", " + this.mostRecentState + "</h4>" + "<h4>" + this.distanceTravelledInCity + " mi</h4>");
+        if (this.showAll === false) $(li).css("display", "none");
+        $("#actualLogs").prepend(li);
+    },
+    
+    addGasPoint: function() {
+        var price = $("#gasPointPrice").val();
+        if (price === "") price = "$2.00";
+        var li = document.createElement("li");
+        $("#actualLogs > li").removeClass("ongoingGasPoint");
+        $(li).addClass("log gasPoint ongoingGasPoint");
+        $(li).data("price", price);
+        $(li).html("<h4>" + this.mostRecentCity + ", " + this.mostRecentState + "</h4>" + "<h4 class='dist'>ongoing</h4>");
+        $("#actualLogs").prepend(li);
+        this.currentGasPointDist = 0;
     }
 }

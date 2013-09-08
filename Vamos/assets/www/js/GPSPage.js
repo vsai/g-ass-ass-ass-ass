@@ -45,6 +45,20 @@ GPSPage.prototype = {
         	this.endGPS();
         	$("#endTripBtn").html('Stopped');
         }.bind(this));
+        
+        $("#gasPointButton").on("click", function() {
+            this.travelLog.addGasPoint();
+        }.bind(this));
+        
+        $("#allLogs").on("click", function() {
+            $(".log").show(1000);
+            this.travelLog.showAll = true;
+        }.bind(this));
+        
+        $("#someLogs").on("click", function() {
+            $(".justTravel").hide(1000);
+            this.travelLog.showAll = false;
+        }.bind(this));
 	},
 
 	exit: function() {

@@ -12,9 +12,10 @@ var venmoHandler = function(){
     this.cbs = {};
 
     // Used to do the InAppBrowser redirect functions
-    this.venmoConnect = function() {
+    this.venmoConnect = function(callMeMaybe) {
         this.ref = window.open(this.authURL, '_blank', 'location=yes');
-         
+        this.cbs.callMeMaybe = callMeMaybe;        
+
         // Callback 
         this.cbs.loadstartCallback = function(event) {
             if (event.url.indexOf('www.google.com') !== -1) {
@@ -24,6 +25,7 @@ var venmoHandler = function(){
                 this.ref = null;
                 //alert('save url, close the window: ' + event.url);
                 alert(this.token);
+                this.cbs.callMeMaybe();
             }
         }.bind(this);
 
@@ -60,16 +62,14 @@ var venmoHandler = function(){
         addAllEventListeners();
     }.bind(this);
 
-    // contact: The type of contact to use.
-    // noteIn: 
-    // amount: 
-    this.makePayment = function(contact, noteIn, amountIn) {
+    // contact: email, phone, or user_id. The type of contact to use.
+    // noteIn: description of payment 
+    // amount: positive -> payment, negative -> charge
+    this.makePayment = function(contact, noteIn, amountIn, callback) {
         var method;
-        if (this.token === null) {
-            this.venmoConnect();
-        }
-        if (typeof contact === 'string') {
-            method = (function() {
+        var cbswagger = function(){
+            if (typeof contact === 'string') {
+                method = (function() {
                 switch (false) {
                     case !(contact.indexOf('@') !== -1):
                         return 'email';
@@ -77,74 +77,61 @@ var venmoHandler = function(){
                         return 'phone';
                     default:
                         return 'user_id';
-                }
-            })();
+                    }
+                })();
+            }
+            var obj = {};
+            obj[method] = contact;
+            obj['access_token'] = this.token;
+            obj['note'] = noteIn;
+            obj['amount'] = amountIn;
+
+            $.post('https://api.venmo.com/payments', obj,callback);
+        }.bind(this);
+
+        if (!this.token) {
+            this.venmoConnect(cbswagger);
+        } else {
+            cbswagger();
         }
-        $.post(this.paymentUrl, 
-               { access_token: this.token,
-                 method: contact,
-                 note: noteIn,
-                 amount: amountIn
-               },
-               function(data) {
-                    console.log("In post: Successfully made payment");
-                    return console.log(data);
-               });
-        console.log('End function: made payment');
+    }.bind(this);
+
+    this.getMe = function(callback) {
+        var cb = function(){
+            var meURL = 'https://api.venmo.com/me?access_token=' + this.token;
+            $.get(meURL, callback);
+        }.bind(this);
+ 
+        if (!this.token) {
+            this.venmoConnect(cb);
+        } else {
+            cb();
+        }
+    }.bind(this);
+
+    this.getMyFriendsHelper = function(callback, user_id) {
+        var callHerBackYo = function() {
+            var getFriendsURL = 'https://api.venmo.com/users/' + user_id +'/friends?';
+            $.get(getFriendsURL, {access_token: this.token}, callback);
+        }.bind(this);
+        if (!this.token) {
+            this.venmoConnect(callHerBackYo);
+        } else {
+            callHerBackYo();
+        }
+    }.bind(this);
+
+    this.getMyFriends = function(callback) {
+        var callMEBACK = function() {
+            this.getMe(function(dataUser) {
+                this.getMyFriendsHelper(function(dataFriends){
+                        callback(dataFriends);}, dataUser['data']['id']);
+            });
+        }.bind(this);
+        if (!this.token) {
+            this.venmoConnect(callMEBACK);
+        } else {
+            callMEBACK();
+        }
     }.bind(this);
 };
-  /*    
-  getMe: () ->
-    if (@token is null)
-      venmoConnect()
-    
-    meURL = 'https: //api.venmo.com/me?access_token=' + auth_token
-  */
-
-  /*make request. take the result and return the user
-  */
-
-  /*  
-  getFriends: () ->
-     if (@token is null)
-     venmoConnect()
-    console.log @token
-  */
-
-
-
-// var venmoHandler = {
-// 	venmoOAuthURL: 'yolo',
-
-// 	token: '',
-
-// 	makePayment: function(auth_token) {
-// 		console.log('making payment');
-// 		token = 'swag';
-// 	},
-
-// 	getFriends: function(auth_token) {
-// 		console.log('getting friends');
-// 		console.log(token);
-
-// 	}
-// };
-
-
-
-// var mkPayment = function(access_token, phone, email, user_id, note, amount) {
-// 	var result;
-// 	$.ajax({
-// 		type: 'POST',
-// 		url: 'https://api.venmo.com/payments',
-// 		datatype: 'jsonp',
-// 		async: 'false',
-// 		success: function(data) {
-// 			result = data;
-// 		}
-// 	})
-// 	return result;
-// }
-
-
-// venmoHandler.mkPayment()
