@@ -29,6 +29,7 @@ var editTabPage = function(nextTabId, page) {
     });
     $(".bottomMost").bind("keyup", function(event) {
         if ($(".bottomMost").val() == "") {
+            $('#friendResults').html('');
             $("#friendResults").css("display", "none");
         }
         else {
@@ -37,6 +38,12 @@ var editTabPage = function(nextTabId, page) {
             $.filter(function(index){
                 return (x[index]['display_name'].indexOf(searchFriendsQuery) !== -1);
             });
+            var friendsHTML = '';
+            for (var i=0; i<x.length; i++) {
+                friendsHTML += '<tr><td>'+x[i]['display_name']+'</td></tr>'
+                if (i>=4) break; //don't populate more than 5 elements in the list
+            }
+
             $("#friendResults").css("display", "block");
         }
     });
