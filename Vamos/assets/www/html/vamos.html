@@ -136,17 +136,20 @@
                 </div>
           			
                 <div class="tabPage" id="travelLog">
-                    <div id="sortButtons">
-                        <button id="allLogs">All</button>
-                        <button id="someLogs">Gas Points</buttons>
+                    <div id="addGasPoint">
+                        <h3 class="currentCity"></h3>
+                        <input type="number" id="gasPointPrice" placeholder = "$/gallon">
+                        <button id="gasPointButton">Add Gas Stop</button>
+                    </div>
+                    <div id="sortWrapper">
+                        <div id="sortButtons">
+                            <span>See:</span>
+                            <button id="allLogs">All</button>
+                            <button id="someLogs">Gas Points</buttons>
+                        </div>
                     </div>
                     <ol id="actualLogs">
                     </ol>
-                    <div id="addGasPoint">
-                        <input type="number" id="gasPointPrice"><span>per gallon</span>
-                        <button id="gasPointButton">Add</button>
-                        <h3 class="currentCity"></h1>
-                    </div>
                 </div>
                 <div class="tabPage" id="GMapsMain">
                     <h3>Route your drive</h3>
