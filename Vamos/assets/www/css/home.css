@@ -3,7 +3,7 @@
 }
 
 #Home #appHeader {
-    height: 100px;
+    height: 50px;
     padding: 20px;
     font-size: 30px;
     margin: auto;
@@ -11,15 +11,15 @@
 }
 .btnBlock{
     position: relative;
-	width: 400px;
-	height: 300px;
+	width: 300px;
+	height: 200px;
     margin: 60px auto;
 }
 
 .homeBtn{
     border-radius: 15px;
     border: 1px solid black;
-    height: 300px;
+    height: 200px;
     position: absolute;
     width: 45%;
     height: 60%;

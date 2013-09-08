@@ -31,8 +31,8 @@ GPSPage.prototype = {
         });
 
 		this.latlons = [];
-        //this.setupGPS();
-        this.testGPS();
+        this.setupGPS();
+        //this.testGPS();
 
         $("#endTripBtn").on("click", function() {
         	if (this.app.passengers.length === 0) {
@@ -42,6 +42,21 @@ GPSPage.prototype = {
         	// mpg (x) and $/gal ($) and passengers(x) for payment?
         	
         	this.endGPS();
+        	$("#endTripBtn").html('Stopped');
+        }.bind(this));
+        
+        $("#gasPointButton").on("click", function() {
+            this.travelLog.addGasPoint();
+        }.bind(this));
+        
+        $("#allLogs").on("click", function() {
+            $(".log").show(1000);
+            this.travelLog.showAll = true;
+        }.bind(this));
+        
+        $("#someLogs").on("click", function() {
+            $(".justTravel").hide(1000);
+            this.travelLog.showAll = false;
         }.bind(this));
 	},
 
@@ -55,7 +70,8 @@ GPSPage.prototype = {
 		$("#mpgDisplay").html(this.app.mpg);
 		$("#costPerGalDisplay").html(this.app.costPerGal);
 
-		$("#milesDisplay").html(this.app.miles);
+		var roundedMiles = Math.round(this.app.miles * 100)/100.0
+		$("#milesDisplay").html(roundedMiles);
 		var totalCost = this.app.miles / this.app.mpg * this.app.costPerGal;
 		if (this.app.passengers.length === 0) {
 			$("#perPersonCostContainer").css("display", "none");
@@ -74,17 +90,24 @@ GPSPage.prototype = {
                 var curCoord = curCity[j];
                 if (i === 0 && j === 0) this.latlons.push([curCoord.latitude, curCoord.longitude]);
                 else {
-	            	this.onSuccess({
-	                	coords: curCoord
-	            	});
+                    var me = this;
+	            	setTimeout(
+                        (function(ind, curCoord) {
+                            return function() {
+                                me.onSuccess({
+                                    coords: curCoord
+                                }, ind);
+                            }
+                        })(i*6 + j, curCoord), (i*6 + j)*2000);
                 }
             }
         }
 	},
 
 	setupGPS: function() {
-		var options = {timeout:15000, enableHighAccuracy:true};
+		var options = {timeout:15000, enableHighAccuracy:true, frequency: 5000};
 		this.app.miles = 0;
+		$("#milesDisplay").html(this.app.miles);
 		
 		watchID = navigator.geolocation.watchPosition(
 			this.onSuccess.bind(this),
@@ -100,28 +123,33 @@ GPSPage.prototype = {
 		this.watchID = null;
 	},
 
-	onSuccess: function(position) {
+	onSuccess: function(position, ind) {
 		var lat = position.coords.latitude;
 		var lon = position.coords.longitude;
 		if (this.latlons.length === 0) {
 			this.latlons.push([lat,lon]);
 			return;
 		}
-		var prevLatLon = this.latlons[this.latlons.length - 1];
+		//var prevLatLon = this.latlons[this.latlons.length - 1];
+        var prevLatLon = this.latlons[ind - 1];
 		var prevLat = prevLatLon[0];
 		var prevLon = prevLatLon[1];
 		if (lat === prevLat && lon === prevLon) return;
 
-		this.app.miles += this.getDistanceFromLatLonInMiles(
+        var increasedDistance = this.getDistanceFromLatLonInMiles(
 			prevLat,
 			prevLon,
 			lat,
 			lon);
-
+		this.app.miles += increasedDistance;
+        this.latlons.push([lat,lon]);
+        this.travelLog.increaseCityMileage(increasedDistance);
+        //var me = this;
+        //setTimeout(function() {me.travelLog.cityFromCoords({lat: lat, longi: lon})}, 1500*i);
+        this.travelLog.cityFromCoords({lat: lat, longi: lon});
 		this.updateUI();
-		console.log(this.app.miles);
 
-		this.latlons.push([lat,lon]);
+		
 	},
 
 	onError: function(error) {

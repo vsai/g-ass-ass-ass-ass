@@ -1,7 +1,7 @@
 #editContent {
     position: relative;
     height: 100%;
-    width: 70%;
+    width: 80%;
     float: left;
 }
 
@@ -16,7 +16,7 @@
 
 
 #editLocation {
-    width: 30%;
+    width: 20%;
     float: left;
     height: 100%;
 }
@@ -29,6 +29,8 @@
 .editNav {
     padding: 50px 0px;
     display: block;
+
+    font-size: 12px;
 }
 
 #editLocation > h3 {
@@ -48,5 +50,5 @@
 }
 
 #edit button {
-    margin: 20px;
+    margin: 10px;
 }
