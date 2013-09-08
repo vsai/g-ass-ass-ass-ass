@@ -9,6 +9,8 @@ var GPSPage = function(app){
 
 GPSPage.prototype = {
 	enter: function() {
+        
+        $('body,html').addClass('backgroundImage');
         this.editState = new editTabPage("#GPSMain", this);
         this.travelLog = new travelLogTabPage(this);
         this.editState.enter();
@@ -32,7 +34,6 @@ GPSPage.prototype = {
 
 		this.latlons = [];
         this.setupGPS();
-        $('body,html').addClass('backgroundImage');
         //this.testGPS();
 
         $("#endTripBtn").on("click", function() {
