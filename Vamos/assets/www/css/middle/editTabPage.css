@@ -1,8 +1,13 @@
-#editContent {
+#editContent li{
     position: relative;
     height: 100%;
     width: 80%;
     float: left;
+    text-align: center;
+}
+
+#editContent input,label {
+    width: 70%;
 }
 
 #edit ol > li {
@@ -23,7 +28,7 @@
 
 #editLocation .editLocContainer {
     position: relative;
-    height: 33.33%;
+    height: 20%;
 }
 
 .editNav {
@@ -39,7 +44,7 @@
 
 #editLocation 
 .selectedTitle {
-    color: blue;
+    color: #AAAAAA;
 }
 
 #edit #editBtns {

@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Vamos</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
         <script type="text/javascript" charset="utf-8" src="../js/libs/jquery-2.0.3.js"></script>
         <!--<script type="text/javascript" charset="utf-8" src="../js/libs/cordova.js"></script>-->
@@ -12,6 +12,7 @@
         <script type="text/javascript" charset="utf-8" src="../js/App.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/HomePage.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/GPSPage.js"></script>
+         <script type="text/javascript" charset="utf-8" src="../js/PaymentPage.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/GMapsPage.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/OdometerPage.js"></script>
         <script type="text/javascript" charset="utf-8" src="../js/tabPages/edit.js"></script>
@@ -36,6 +37,7 @@
         <link rel="stylesheet" type="text/css" href="../css/layout.css">
         <link rel="stylesheet" type="text/css" href="../css/home.css">
         <link rel="stylesheet" type="text/css" href="../css/middle/navigation.css">
+        <link rel="stylesheet" type="text/css" href="../css/middle/passengers.css">
         <link rel="stylesheet" type="text/css" href="../css/middle/GPSMain.css">
         <link rel="stylesheet" type="text/css" href="../css/middle/editTabPage.css">
         <link rel="stylesheet" type="text/css" href="../css/middle/travelLogTabPage.css">
@@ -43,40 +45,63 @@
 
     <body>
         <div id="pagesContainer">
-    		    <div class="page" id="Home">
+            <div class="page" id="Home">
                 <div id="appHeader">Vamos</div>
                 <div class="btnBlock">
-                    <div class="homeBtn" id="GPSLink">Use the GPS</div>
+                    <div class="homeBtn" id="GPSLink"></div>
                 </div>
                 <div class="btnBlock">
-                    <div class="homeBtn" id="GMapsLink">Use GMaps to route</div>
-                    <div class="homeBtn" id="OdometerLink">Put in Info from Odometer</div>
+                    <div class="homeBtn" id="GMapsLink"></div>
+                    <div class="homeBtn" id="OdometerLink"></div>
                 </div>
       	    </div>
-        		<div class="page" id="Middle">
+            <div class="page" id="Middle">
                 <div class="tabPage" id="edit">
                     <div id="editLocation">
                         <div class="editLocContainer"><h3 class="editNav" id="edit0">Price</h3></div>
                         <div class="editLocContainer"><h3 class="editNav" id="edit1">Efficiency</h3></div>
                         <div class="editLocContainer"><h3 class="editNav" id="edit2">Friends</h3></div>
                     </div>
-    				        <ol id="editContent">
+			        <ol id="editContent">
                         <li id="editContent0">
                             <h1>Price</h1>
                             <label for="costPerGallon">Cost per Gallon</label>
-                            <input type="text" id="costPerGallon">
+                            <input type="number" id="costPerGallon">
                         </li>
                         <li id="editContent1">
                             <h1>Efficiency</h1>
+                            <label for="makeInput">Make</label>
+                            <input class = "carPrediction" type="text" id="makeInput">
+                            <label for="modelInput">Model</label>
+                            <input class = "carPrediction" type="text" id="modelInput">
+
+                            <label for="yearInput">Year</label>
+                            <input class = "carPrediction" type="number" id="yearInput">
+                            <button id="makeButton">Search</button>
+
+                            <div id="or">
+                                <span id="line"></span>or<span id="line"></span>
+                            </div>
+
                             <label for="mpgInput">MPG</label><br>
-                            <input type="text" id="mpgInput"><br>
-                            <label for="makeInput">Make</label><br>
-                            <input type="text" id="makeInput"><br>
-                            <label for="modelInput">Model</label><br>
-                            <input type="text" id="modelInput">
+                            <input type="number" id="mpgInput">
                         </li>
                         <li id="editContent2">
                             <h1>Passengers</h1>
+                            <div id="friendsOrFoes">
+                                <input class="addPassenger bottomMost" placeholder="Add a passenger" type="text">
+                                <table id="friendResults">
+                                    <tr>
+                                        Jon Burman
+                                    </tr>
+                                    <tr>
+                                        Carter Salismon
+                                    </tr>
+                                    <tr>
+                                        Jenny Jennerson
+                                    </tr>
+                                </table>
+                            </div>
                         </li>
                         <div id="editBtns">
                             <button id="continueEditBtn">Continue</button>
@@ -96,8 +121,14 @@
                     <h3 class="currentCity">Current City: </h3>
                     <h3 id="displayMPG"></h3>
                     <button id="endTripBtn">End Trip</button>
-                    
-          			</div>
+                    <div class="endConfirmation">
+                        <h4>Are you sure you want to end your trip with the current settings?</h4>
+                        <div id="endButtonChoices">
+                            <button class="yes">Yes</button>
+                            <button class="no">No</button>
+                        </div>
+                    </div>
+                </div>
           			
                 <div class="tabPage" id="travelLog">
                     <div id="sortButtons">
@@ -119,18 +150,23 @@
                     <input type="text" id="endDest"><br>
                 </div>
                 <div class="tabPage" id="odomMain">
-                    <label for="milesTravelled">Miles Travelled</label><br>
-                    <input type="text" id="milesTravelled"><br>
-                    <label for="startMileage">Starting Mileage</label><br>
-                    <input type="text" id="makeInput"><br>
-                    <label for="endMileage">End Mileage</label><br>
-                    <input type="text" id="endMileage"><br>
+                    <label for="milesTravelled">Miles Travelled</label>
+                    <input type="number" id="milesTravelled">
+                    <div id="or">
+                        <span id="line"></span>or<span id="line"></span>
+                    </div>
+                    <label for="startMileage">Starting Mileage</label>
+                    <input type="number" id="makeInput">
+                    <label for="endMileage">End Mileage</label>
+                    <input type="number" id="endMileage">
                 </div>
+                
 
-          			<ul id="nav">
-    				
-                </ul>
-    		    </div>
+      			<ul id="nav"></ul>
+		    </div>
+            <div class="page" id="Payment">
+                <h1>Pay some dough</h1>
+            </div>
         </div>
     </body>
 </html>

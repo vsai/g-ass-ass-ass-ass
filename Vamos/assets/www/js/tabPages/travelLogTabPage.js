@@ -37,6 +37,10 @@ travelLogTabPage.prototype = {
                             this.mostRecentState = state;
                         }
                     }
+                    //If a gas point doesn't exist, make one to start off the trip.
+                    if (!$(".gasPoint")[0]) {
+                        if (city !== "" && state !== "") this.addGasPoint();
+                    }
                     $(".currentCity").html("Current City: " + this.mostRecentCity + ", " + this.mostRecentState);
                 } 
                 else {
@@ -66,6 +70,7 @@ travelLogTabPage.prototype = {
         var li = document.createElement("li");
         $("#actualLogs > li").removeClass("ongoingGasPoint");
         $(li).addClass("log gasPoint ongoingGasPoint");
+        if (!$(".gasPoint")[0]) $(li).addClass("firstGasPoint");
         $(li).data("price", price);
         $(li).html("<h4>" + this.mostRecentCity + ", " + this.mostRecentState + "</h4>" + "<h4 class='dist'>ongoing</h4>");
         $("#actualLogs").prepend(li);

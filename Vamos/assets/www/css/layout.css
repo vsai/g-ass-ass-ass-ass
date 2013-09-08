@@ -12,20 +12,20 @@ body {
 	margin: 0px;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     font-size: 15px;
+    background-image: url('../img/texture.jpg');
+    /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d0e4f7), color-stop(98%,#73b1e7)); 
+    background: -webkit-linear-gradient(top, #d0e4f7 0%,#73b1e7 98%); */
+}
 
-    /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f4f0), color-stop(52%,#e5eecc), color-stop(100%,#dcecb5)); /* Chrome,Safari4+ */
-    /*background: -webkit-linear-gradient(top, #f6f4f0 0%,#e5eecc 52%,#dcecb5 100%); /* Chrome10+,Safari5.1+ */
- 
+body.backgroundImage {
+    background: url("../img/road1.jpg");
+    background-size: cover;
+    background-position: center;
 }
 
 #pagesContainer {
-    width:100%;
-    height:100%;
-    background: url("../img/road1.jpg");
-    background-repeat:no-repeat;
-    background-attachment:fixed;//**Edit: Add this and check**/
-    background-size:cover; /*Edit2: Add this and check*/
-    background-position:center; 
+    /*background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f4f0), color-stop(52%,#e5eecc), color-stop(100%,#dcecb5)); /* Chrome,Safari4+ */
+    /*background: -webkit-linear-gradient(top, #f6f4f0 0%,#e5eecc 52%,#dcecb5 100%); /* Chrome10+,Safari5.1+ */
 }
 
 .page {
@@ -54,6 +54,32 @@ h5{
     font-size: 1.1em;
 }
 
+input,label{
+    text-align: center;
+    font-size: 15px;
+    border-radius: 5px;
+    display: block;
+    margin: 5px auto;
+    padding: 5px; 
+}
+
+input {
+    margin-bottom: 15px;
+}
+
+#or {
+    margin: 40px auto;
+}
+
+#line {
+    border-top: 1px solid black;
+    margin: 0px 5px;
+    width: 80px;
+    position: relative;
+    bottom: 2px;
+    display: inline-block;
+}
+
 button {
     width: 120px;
     height: 40px;
@@ -68,5 +94,10 @@ button {
     -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.endConfirmation {
+    height: 0px;
+    overflow: hidden;
 }
 

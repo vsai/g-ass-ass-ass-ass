@@ -33,7 +33,7 @@
 }
 
 .tab.active {
-	background: #fff;
+    background: none;
 	position: relative;
 	top: 1px;
 	border-color: #666;

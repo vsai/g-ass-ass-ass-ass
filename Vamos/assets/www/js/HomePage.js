@@ -7,7 +7,7 @@ var HomePage = function(app){
             var btnId = $(e.target).closest('.homeBtn').attr("id");
             setTimeout(function() {me.app.switchPage(btnId.replace(/Link$/, ""))}, 1000);
             //this.app.API.venmoHandler.venmoConnect();
-       // }
+        //}
 	}.bind(this));
 }
 
