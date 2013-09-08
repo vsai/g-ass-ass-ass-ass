@@ -11,8 +11,10 @@ var gmapsHandler = function(page) {
             if (status == google.maps.DirectionsStatus.OK) {
                 var meters = response.routes[0].legs[0].distance.value;
                 var miles = meters / 1609.34;
-                console.log(response.routes);
-                this.page.receiveDistance(miles);
+
+                this.page.receiveMiles(miles);
+            } else {
+                alert("Unable to get distance");
             }
         }.bind(this));
     }.bind(this);

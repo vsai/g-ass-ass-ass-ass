@@ -24,6 +24,7 @@
             window.deviceReady = false;
             document.addEventListener('deviceready', onDeviceReady, false);
             function onDeviceReady() {
+                //alert("Device is rrrrrrrrready!");
                 window.deviceReady = true;
             }
         </script>
@@ -94,8 +95,7 @@
                             <div id="friendsOrFoes">
                                 <input class="addPassenger bottomMost" placeholder="Add a passenger" type="text">
                                 <table id="friendResults">
-                                    <!--
-                                    <tr>
+                                    <!-- <tr>
                                         <td>Jon Burman</td>
                                     </tr>
                                     <tr>
@@ -103,8 +103,7 @@
                                     </tr>
                                     <tr>
                                         <td>Jenny Jennerson</td>
-                                    </tr>
-                                    -->
+                                    </tr> -->
                                 </table>
                             </div>
                         </li>
@@ -136,26 +135,27 @@
                 </div>
           			
                 <div class="tabPage" id="travelLog">
-                    <div id="addGasPoint">
-                        <h3 class="currentCity"></h3>
-                        <input type="number" id="gasPointPrice" placeholder = "$/gallon">
-                        <button id="gasPointButton">Add Gas Stop</button>
-                    </div>
-                    <div id="sortWrapper">
-                        <div id="sortButtons">
-                            <span>See:</span>
-                            <button id="allLogs">All</button>
-                            <button id="someLogs">Gas Points</buttons>
-                        </div>
+                    <div id="sortButtons">
+                        <button id="allLogs">All</button>
+                        <button id="someLogs">Gas Points</buttons>
                     </div>
                     <ol id="actualLogs">
                     </ol>
+                    <div id="addGasPoint">
+                        <input type="number" id="gasPointPrice"><span>per gallon</span>
+                        <button id="gasPointButton">Add</button>
+                        <h3 class="currentCity"></h1>
+                    </div>
                 </div>
                 <div class="tabPage" id="GMapsMain">
                     <h3>Route your drive</h3>
                     <input type="text" id="address0" placeholder="Start Address">
                     <input type="text" id="address1" placeholder="Next Address">
-                    <div class="addDestinationBtn">+</div>
+
+                    <div><span id="gmapsMiles">---</span> miles</div>
+
+                    <button id="gmapsGetMilesBtn">Get Miles</button>
+
                     <button id="gmapsSubmitBtn">Submit</button>
 
                 </div>
@@ -176,9 +176,7 @@
       			<ul id="nav"></ul>
 		    </div>
             <div class="page" id="Payment">
-                <h1><span id="paymentMiles"></span> miles</h1>
-                <h1>$<span id="paymentCost"></span> total</h1>
-                <h3>$<span id="paymentPerPerson"></span> per person</h3>
+                <h1>Pay some dough</h1>
             </div>
         </div>
     </body>

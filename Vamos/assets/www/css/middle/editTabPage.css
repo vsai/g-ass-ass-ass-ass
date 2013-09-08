@@ -90,3 +90,24 @@
     font-weight: bold;
     margin-top: 15px;
 }
+
+#friendResults {
+    padding-top: 2px;
+    width: 70%
+    text-align: center;
+    font-size: 15px;
+    border-radius: 5px;
+    display: block;
+    margin: 4px auto;
+    height: 200px;
+    background-color: #EEEEEE;
+    opacity: 50%;
+
+}
+
+.friendName {
+    display: block;
+    height: 40px;
+    text-align: center;
+    padding-top: 2px 0px;
+}

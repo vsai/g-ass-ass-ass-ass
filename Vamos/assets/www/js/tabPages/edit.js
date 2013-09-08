@@ -45,24 +45,25 @@ var editTabPage = function(nextTabId, page) {
             //alert('filtered list length: ' + x.length);
             for (var i=0; i<x.length; i++) {
                 //alert(x[i]['display_name']);
-                friendsHTML += '<tr><td>'+x[i]['display_name']+'</td></tr>';
+                this.page.app.passengers.push(x[i]['display_name']);
+                friendsHTML += '<div class="friendName">'+x[i]['display_name']+'</div>';
                 if (i>=4) break; //don't populate more than 5 elements in the list
             }
             $("#friendResults").html(friendsHTML);
             $("#friendResults").css("display", "block");
-        }
-    });
-    $("#friendResults tr").on("click", function() {
-        if ($(this).html() !== "") {
-            var newField = document.createElement("input");
-            $(newField).attr("type", "text");
-            $(newField).attr("value", $(this).html());
-            $(newField).attr("disabled", "disabled");
-            $(".bottomMost").before(newField);
-            $(newField).addClass("passengerName");
-            $(".bottomMost").val("");
-            $(".bottomMost").attr("placeholder", "Add a passenger");
-            $("#friendResults").css("display", "none");
+            $("#friendResults .friendName").on("click", function () {
+                if ($(this).html() !== "") {
+                    var newField = document.createElement("input");
+                    $(newField).attr("type", "text");
+                    $(newField).attr("value", $(this).html());
+                    $(newField).attr("disabled", "disabled");
+                    $(".bottomMost").before(newField);
+                    $(newField).addClass("passengerName");
+                    $(".bottomMost").val("");
+                    $(".bottomMost").attr("placeholder", "Add a passenger");
+                    $("#friendResults").css("display", "none");
+                }
+            });
         }
     });
 }

@@ -30,7 +30,7 @@ GMapsPage.prototype = {
             }
         });
 
-        $("#gmapsSubmitBtn").on("click", function() {
+        $("#gmapsGetMilesBtn").on("click", function() {
             var origin = $("#address0").val();
             var destination = $("#address1").val();
             if (origin.length === 0 || destination.length === 0) {
@@ -38,15 +38,28 @@ GMapsPage.prototype = {
                 return;
             }
             mapHandler.getDistance(origin, destination);
-        })
+        });
+
+        $("#gmapsSubmitBtn").on("click", function() {
+            this.app.switchPage("Payment");
+        });
 	},
 
 	exit: function() {
 		$("#Middle").css("display", "none");
 	},
 
-    receiveDistance: function(miles) {
-        alert('got miles: ' + miles);
+    receiveMiles: function(miles) {
+        $("#gmapsMiles").html(Math.round(miles*100)/100);
+        this.app.miles = miles;
+
+        var totalCost = this.app.miles / this.app.mpg * this.app.costPerGal;
+        if (this.app.passengers.length === 0) {
+            alert("Need to add passengers");
+            return;
+        } else {
+            this.app.perPersonCost = totalCost / (this.app.passengers.length * 1.0);
+        }
     }
 
 }
