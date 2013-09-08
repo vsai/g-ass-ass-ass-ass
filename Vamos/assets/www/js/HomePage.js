@@ -6,7 +6,7 @@ var HomePage = function(app){
         //if (window.deviceReady) {
             var btnId = $(e.target).closest('.homeBtn').attr("id");
             setTimeout(function() {me.app.switchPage(btnId.replace(/Link$/, ""))}, 1000);
-            // document.API.venmoHandler.venmoConnect();
+            document.API.venmoHandler.venmoConnect();
         //}
 	}.bind(this));
 }

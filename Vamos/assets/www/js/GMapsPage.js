@@ -37,18 +37,17 @@ GMapsPage.prototype = {
                 alert("Add origin and destination");
                 return;
             }
-            var distance = mapHandler.getDistance(origin, destination);
-            if (distance === null) {
-                alert("Unable to calculate distance");
-                return;
-            }
-            alert("Distance: "+ distance);
+            mapHandler.getDistance(origin, destination);
         })
 	},
 
 	exit: function() {
 		$("#Middle").css("display", "none");
 	},
+
+    receiveDistance: function(miles) {
+        alert('got miles: ' + miles);
+    }
 
 }
 
