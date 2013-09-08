@@ -18,6 +18,12 @@ var editTabPage = function(nextTabId, page) {
         this.switchTo(newIndexId.charAt(newIndexId.length - 1));
         this.updateAppInfo();
     }.bind(this));
+    $("#makeButton").on("click", function() {
+        var year = $("#yearInput").val();
+        var make = $("#makeInput").val();
+        var model = $("#modelInput").val();
+        getMPG(year, make, model);
+    });
 }
 
 editTabPage.prototype = {

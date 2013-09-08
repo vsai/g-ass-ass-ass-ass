@@ -4,14 +4,22 @@ function getMPG(year, make, model) {
             processRes(result);
         }
     );
+    $.ajaxSetup({
+        async: true
+    });
 }
 
 function processRes(result) {
-    result = result["Trims"];
-    for (var i = 0; i < result.length; i++) {
-        var curCar = result[i];
-        var curID = curCar["model_id"];
-        var resulter = getMPGfromModel(curID);
+    if (result !== undefined) {
+        console.log(result);
+        result = result["Trims"];
+        if (result !== undefined) {
+            for (var i = 0; i < result.length; i++) {
+                var curCar = result[i];
+                var curID = curCar["model_id"];
+                var resulter = getMPGfromModel(curID);
+            }
+        }
     }
 }
 
@@ -19,25 +27,28 @@ function getMPGfromModel(model_id) {
     $.ajaxSetup({
         async: false
     });
+    var target = "#mpgInput";
     $.getJSON("http://www.carqueryapi.com/api/0.3/?callback=?&cmd=getModel" + "callback=?", 
         {cmd:"getModel", model:model_id}, function(result) {
-            console.log(result);
-            var hwy = result[0]["model_mpg_hwy"];
-            var mixed = result[0]["model_mpg_mixed"];
-            var city = result[0]["model_mpg_city"];
-            var html = $("#displayMPG").html();
-            if (html === "") {
-                if (mixed !== null) {
-                    $("#displayMPG").html(mixed);
-                    return 1;
-                }
-                if (hwy !== null) {
-                    $("#displayMPG").html(hwy);
-                    return 1;
-                }
-                if (city !== null) {
-                    $("#displayMPG").html(city);
-                    return 1;
+            if (result !== undefined) {
+                console.log("HERE!");
+                var hwy = result[0]["model_mpg_hwy"];
+                var mixed = result[0]["model_mpg_mixed"];
+                var city = result[0]["model_mpg_city"];
+                var html = $(target).val();
+                if (html === "") {
+                    if (mixed !== null) {
+                        $(target).val(mixed);
+                        return 1;
+                    }
+                    if (hwy !== null) {
+                        $(target).val(hwy);
+                        return 1;
+                    }
+                    if (city !== null) {
+                        $(target).val(city);
+                        return 1;
+                    }
                 }
             }
         }
