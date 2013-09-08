@@ -12,8 +12,7 @@
 	float: left;
 	width: 33.33%;
 	/*zoom:1; *display:inline;*/
-	background: #eee;
-	border: solid 1px #999;
+	background: blue;
     text-align: center;
 	/*-moz-border-radius: 4px 4px 0 0;
 	-webkit-border-radius: 4px 4px 0 0;*/
@@ -30,12 +29,10 @@
 	display: block;
 	padding: 0 10px;
 	outline: none;
+    color: black;
 }
 
-.tab.active {
-    background: none;
-	position: relative;
-	top: 1px;
-	border-color: #666;
-	border-top: none;
+.tab.active a{
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+    color: #FFF;
 }

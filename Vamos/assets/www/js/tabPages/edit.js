@@ -58,10 +58,6 @@ var editTabPage = function(nextTabId, page) {
             $(".bottomMost").val("");
             $(".bottomMost").attr("placeholder", "Add a passenger");
             $("#friendResults").css("display", "none");
-            $(".passengerName").on("click", function() {
-                console.log("HUR");
-                $(this).css("display", "none");
-            });
         }
     });
 }

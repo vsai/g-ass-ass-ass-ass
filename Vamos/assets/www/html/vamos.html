@@ -58,33 +58,36 @@
             <div class="page" id="Middle">
                 <div class="tabPage" id="edit">
                     <div id="editLocation">
-                        <div class="editLocContainer"><h3 class="editNav" id="edit0">Price</h3></div>
-                        <div class="editLocContainer"><h3 class="editNav" id="edit1">Efficiency</h3></div>
-                        <div class="editLocContainer"><h3 class="editNav" id="edit2">Friends</h3></div>
+                        <div class="leftBorder"></div>
+                        <div class="leftBorder2"></div>
+                        <div class="editLocContainer"><span class="numberCircle">1</span><h3 class="editNav" id="edit0">Price</h3></div>
+                        <div class="editLocContainer"><span class="numberCircle">2</span><h3 class="editNav" id="edit1">Efficiency</h3></div>
+                        <div class="editLocContainer"><span class="numberCircle">3</span><h3 class="editNav" id="edit2">Friends</h3></div>
                     </div>
 			        <ol id="editContent">
                         <li id="editContent0">
                             <h1>Price</h1>
-                            <label for="costPerGallon">Cost per Gallon</label>
+                            <label for="costPerGallon" class="carLab">Cost per Gallon ($)</label>
                             <input type="number" id="costPerGallon">
                         </li>
                         <li id="editContent1">
                             <h1>Efficiency</h1>
-                            <label for="makeInput">Make</label>
+                            <label for="makeInput" class="carLab">Make</label>
                             <input class = "carPrediction" type="text" id="makeInput">
-                            <label for="modelInput">Model</label>
+                            <label for="modelInput" class="carLab">Model</label>
                             <input class = "carPrediction" type="text" id="modelInput">
 
-                            <label for="yearInput">Year</label>
+                            <label id="yearLabel" for="yearInput" class="carLab">Year</label>
                             <input class = "carPrediction" type="number" id="yearInput">
                             <button id="makeButton">Search</button>
 
-                            <div id="or">
+                            <!--<div id="or">
                                 <span id="line"></span>or<span id="line"></span>
                             </div>
 
                             <label for="mpgInput">MPG</label><br>
-                            <input type="number" id="mpgInput">
+                            <input type="number" id="mpgInput">-->
+                            <h3 id="mpgInput"></h3>
                         </li>
                         <li id="editContent2">
                             <h1>Passengers</h1>
@@ -104,8 +107,8 @@
                             </div>
                         </li>
                         <div id="editBtns">
-                            <button id="continueEditBtn">Continue</button>
-                            <button id="skipEditBtn">Skip For Now</button>
+                            <button id="continueEditBtn">Next &rarr;</button>
+                            <!--<button id="skipEditBtn">Skip For Now</button>-->
                         </div>
                     </ol>
                 </div>
@@ -138,7 +141,7 @@
                     <ol id="actualLogs">
                     </ol>
                     <div id="addGasPoint">
-                        <input type="text" id="gasPointPrice"><span>per gallon</span>
+                        <input type="number" id="gasPointPrice"><span>per gallon</span>
                         <button id="gasPointButton">Add</button>
                         <h3 class="currentCity"></h1>
                     </div>
@@ -150,7 +153,7 @@
                     <input type="text" id="endDest"><br>
                 </div>
                 <div class="tabPage" id="odomMain">
-                    <label for="milesTravelled">Miles Travelled</label>
+                    <label for="milesTravelled">Miles Traveled</label>
                     <input type="number" id="milesTravelled">
                     <div id="or">
                         <span id="line"></span>or<span id="line"></span>
