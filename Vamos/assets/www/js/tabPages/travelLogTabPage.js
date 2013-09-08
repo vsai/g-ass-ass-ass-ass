@@ -52,7 +52,9 @@ travelLogTabPage.prototype = {
     
     increaseCityMileage: function(incr) {
         this.distanceTravelledInCity += incr;
+        this.distanceTravelledInCity = Math.round(100*this.distanceTravelledInCity) / 100;
         this.currentGasPointDist += incr;
+        this.currentGasPointDist = Math.round(100*this.currentGasPointDist) / 100;
         $(".ongoingGasPoint .dist").html(this.currentGasPointDist);
     },
     
