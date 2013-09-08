@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+            <title>MyGasFeedTest</title>
+    
+    <script type="text/javascript" charset="utf-8" src="../js/libs/jquery-2.0.3.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../js/API/api.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        var a = new myGasFeedHandler();
+        console.log('Calculating Gas Price');
+        a.getNearAverageGasPrice(39.950382,-75.196644, function(a){ console.log(a); })
+    </script>
+  </head>
+  <body>
+    <p id="geolocation">Device not ready yet</p>
+  </body>
+</html>
