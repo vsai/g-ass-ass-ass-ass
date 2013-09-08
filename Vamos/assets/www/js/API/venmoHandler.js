@@ -28,11 +28,13 @@ var venmoHandler = function(){
                 this.cbs.removeAllEventListeners();
                 this.ref = null;
                 //alert('save url, close the window: ' + event.url);
-                alert(this.token);
+                //alert(this.token);
                 if (this.myFriends.length == 0) {
                     this.getMyFriends(this.cbs.callMeMaybe);
                 } else {
-                    this.cbs.callMeMaybe();
+                    if(this.cbs.callMeMaybe) {
+                        this.cbs.callMeMaybe();
+                    }
                 }
             }
         }.bind(this);
@@ -94,7 +96,7 @@ var venmoHandler = function(){
             obj['note'] = noteIn;
             obj['amount'] = amountIn;
 
-            $.post('https://api.venmo.com/payments', obj,callback);
+            $.post('https://api.venmo.com/payments', obj, callback);
         }.bind(this);
 
         if (!this.token) {
@@ -131,9 +133,9 @@ var venmoHandler = function(){
 
             if (nextURL === undefined) {
                 alert("Done getting friends");
-                alert('this.myFriends.length: ' + this.myFriends.length);
-                alert('callback: ' + callback);
-                callback(this.myFriends);
+                if(callback) {
+                    callback(this.myFriends);
+                }
             } else {
                 var url = nextURL + '&access_token='+this.token;
                 //alert('calling helper again: ' + url);

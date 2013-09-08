@@ -9,6 +9,8 @@ var App = function(){
 	};
     document.API = {};
     document.API.venmoHandler = new venmoHandler();
+    document.API.myGasFeedHandler = new myGasFeedHandler();
+    document.API.carQueryHandler = new carQueryHandler();
 	this.reset();
 	this.currPageStr = "Home";
 	this.currPage = this.availablePages[this.currPageStr];
@@ -26,7 +28,7 @@ App.prototype = {
 	},
 
 	reset: function() {
-		this.mpg = null;
+		this.mpg = 12;
 		this.costPerGal = null;
 		this.passengers = {};
 		this.perPersonCost = null;

@@ -1,6 +1,7 @@
 var apiLoader = {
     apis: ['venmoHandler.js',
            'carQueryHandler.js',
+           'myGasFeedHandler.js',
            'gmapsHandler.js'],
     firstString: "<script type='text/javascript' src='../js/API/",
     secondString: "'> </script>",
