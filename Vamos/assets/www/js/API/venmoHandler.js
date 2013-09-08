@@ -67,9 +67,6 @@ var venmoHandler = function(){
     // amount: positive -> payment, negative -> charge
     this.makePayment = function(contact, noteIn, amountIn, callback) {
         var method;
-        alert(contact);
-        alert(noteIn);
-        alert(amountIn);
         var cbswagger = function(){
             if (typeof contact === 'string') {
                 method = (function() {
@@ -83,9 +80,6 @@ var venmoHandler = function(){
                     }
                 })();
             }
-            alert(contact);
-            alert(noteIn);
-            alert(callback);
             var obj = {};
             obj[method] = contact;
             obj['access_token'] = this.token;
@@ -100,12 +94,6 @@ var venmoHandler = function(){
         } else {
             cbswagger();
         }
-        //if (typeof contact === 'string') {
-        //    method = (               //function(data) {
-               //     console.log("In post: Successfully made payment");
-               //     return console.log(data);
-               //});
-        //console.log('End function: made payment');
     }.bind(this);
 
     this.getMe = function(callback) {
@@ -119,20 +107,17 @@ var venmoHandler = function(){
         } else {
             cb();
         }
+    }.bind(this);
 
-    //   function(data) {
-     //     console.log("In get: Successfully got user data");
-     //     return console.log(data);
-     //   }
-     // );
-   }.bind(this);
-
-   this.getMyFriends = function(callback, user_id) {
-     if (this.token === null) {
-       this.venmoConnect();
-     }
-     var getFriendsURL = 'https://api.venmo.com/users/' + user_id +'/friends?';
-
-     $.get(getFriendsURL, {access_token: this.token}, callback);
-   }
+    this.getMyFriends = function(callback, user_id) {
+        var callHerBackYo = function() {
+            var getFriendsURL = 'https://api.venmo.com/users/' + user_id +'/friends?';
+            $.get(getFriendsURL, {access_token: this.token}, callback);
+        }.bind(this);
+        if (!this.token) {
+            this.venmoConnect(callHerBackYo);
+        } else {
+            callHerBackYo();
+        }
+    }
 };
