@@ -7,8 +7,8 @@ var App = function(){
 		"Odometer": new OdometerPage(this),
 		"Payment": new PaymentPage(this)
 	};
-    this.API = {};
-    this.API.venmoHandler = new venmoHandler();
+    document.API = {};
+    document.API.venmoHandler = new venmoHandler();
 	this.reset();
 	this.currPageStr = "Home";
 	this.currPage = this.availablePages[this.currPageStr];

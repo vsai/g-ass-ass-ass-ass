@@ -27,11 +27,16 @@ var editTabPage = function(nextTabId, page) {
     $("#costPerGallon").bind("keyup", function() {
         $(".firstGasPoint").data("price", $("#costPerGallon").val());
     });
-    $(".bottomMost").bind("keyup", function() {
+    $(".bottomMost").bind("keyup", function(event) {
         if ($(".bottomMost").val() == "") {
             $("#friendResults").css("display", "none");
         }
         else {
+            var searchFriendsQuery = $(".bottomMost").val();
+            var x = [].concat(document.API.venmoHandler.myFriends);
+            $.filter(function(index){
+                return (x[index]['display_name'].indexOf(searchFriendsQuery) !== -1);
+            });
             $("#friendResults").css("display", "block");
         }
     });
