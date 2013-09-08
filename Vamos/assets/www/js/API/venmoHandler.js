@@ -4,7 +4,11 @@ var venmoHandler = function(){
 
     // Token for the app
     this.token = null;
- 
+    this.timestamp = null;
+
+    this.userId = null;
+    this.myFriends = [];
+     
     // The controller for the InAppBrowser.
     this.ref = null;
 
@@ -25,7 +29,11 @@ var venmoHandler = function(){
                 this.ref = null;
                 //alert('save url, close the window: ' + event.url);
                 alert(this.token);
-                this.cbs.callMeMaybe();
+                if (this.myFriends.length == 0) {
+                    this.getMyFriends(this.cbs.callMeMaybe);
+                } else {
+                    this.cbs.callMeMaybe();
+                }
             }
         }.bind(this);
 
@@ -109,29 +117,48 @@ var venmoHandler = function(){
         }
     }.bind(this);
 
-    this.getMyFriendsHelper = function(callback, user_id) {
-        var callHerBackYo = function() {
-            var getFriendsURL = 'https://api.venmo.com/users/' + user_id +'/friends?';
-            $.get(getFriendsURL, {access_token: this.token}, callback);
-        }.bind(this);
-        if (!this.token) {
-            this.venmoConnect(callHerBackYo);
-        } else {
-            callHerBackYo();
-        }
-    }.bind(this);
-
     this.getMyFriends = function(callback) {
-        var callMEBACK = function() {
-            this.getMe(function(dataUser) {
-                this.getMyFriendsHelper(function(dataFriends){
-                        callback(dataFriends);}, dataUser['data']['id']);
-            });
+        //alert("im in getmyfriends");
+
+        // Makes the API call to get the friends.  
+        this.cbs.getMyFriendsHelper = function(data) {
+            //alert('data[data]: ' + data['data'].length);
+            this.myFriends = this.myFriends.concat(data['data']);
+            //alert('getMyFriendsHelper: ' + this.myFriends.length);
+
+            // Will be undefined if no next page.
+            var nextURL = data['pagination']['next'];
+
+            if (nextURL === undefined) {
+                //alert("Done getting friends");
+                callback(this.myFriends);
+            } else {
+                var url = nextURL + '&access_token='+this.token;
+                //alert('calling helper again: ' + url);
+                $.get(url, this.cbs.getMyFriendsHelper);
+            }
         }.bind(this);
+
+        this.cbs.getMeCallback = function(dataUser) {
+            //alert(dataUser['data']['id']);
+            //alert('Got user Id: ' + dataUser['data']['id']);
+            this.userId = dataUser['data']['id'];
+            var getFriendsURL = 'https://api.venmo.com/users/' +
+                                this.userId +'/friends?';
+            //alert(this.cbs.getMyFriendsHelper);
+            //alert(this.token);
+            $.get(getFriendsURL, {access_token: this.token}, this.cbs.getMyFriendsHelper);
+        }.bind(this);
+
+        this.cbs.connectCallBack = function() {
+            //alert('Got access token');
+            this.getMe(this.cbs.getMeCallback);
+        }.bind(this);
+
         if (!this.token) {
-            this.venmoConnect(callMEBACK);
+            this.venmoConnect(this.cbs.connectCallBack);
         } else {
-            callMEBACK();
+            this.cbs.connectCallBack();
         }
     }.bind(this);
 };
